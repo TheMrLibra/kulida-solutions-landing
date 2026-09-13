@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GT America Font Definitions */
+@font-face {
+  font-family: "GT America Regular";
+  src: url("https://framerusercontent.com/assets/P3OjLjGu6v81n98w2gJu394bcVY.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "GT America Medium";
+  src: url("https://framerusercontent.com/assets/QY4Xq3u8mkj66gnwHTlYuNpS9iE.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "GT America Regular Placeholder";
+  src: local("Arial");
+  ascent-override: 98.50%;
+  descent-override: 25.41%;
+  line-gap-override: 0.00%;
+  size-adjust: 101.52%;
+}
+
+/* Global Font & Button Radius Application */
+body,
+input,
+textarea,
+select,
+button {
+  font-family: "GT America Regular", "GT America Regular Placeholder", sans-serif !important;
+}
+
+/* All buttons inherit 10rem border radius pill styling */
+button,
+.btn {
+  border-radius: 10rem !important;
+}
+
+/* ==========================================================================
+   HERO SUBHEADLINE TYPOGRAPHY CLASS
+   ========================================================================== */
+.hero-subheadline {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .hero-subheadline {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-subheadline {
+    font-size: 1.65rem;
+  }
+}
+
+/* ==========================================================================
+   IMAGE SWAPPING CONFIGURATION
+   Drop your files into /public/images/ and update the paths below.
+   ========================================================================== */
+:root {
+  /* Hero Background (Place file at public/images/hero-bg.jpg) */
+  --hero-bg-url: url('/images/hero-bg.png'), url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80');
+
+  /* CTA Cloud Parallax Background (Place file at public/images/cta-clouds.jpg) */
+  --cta-clouds-bg-url: url('/images/cta-clouds.jpg'), url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1920&q=80');
+}
+
+.bg-hero-painterly {
+  background-image: var(--hero-bg-url);
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.bg-cta-clouds {
+  background-image: var(--cta-clouds-bg-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Duna Grid Overlay Pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+/* Mask to smoothly fade Hero painterly art into Duna canvas */
+.hero-mask-gradient {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+/* Duna Glassmorphism Utility */
+.duna-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Metadata badge tag styling */
+.duna-badge {
+  font-family: "GT America Regular", "GT America Regular Placeholder", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Dropdown Bottom-to-Up Staggered Animation */
+@keyframes dropdownItemSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-item-slide-up {
+  opacity: 0;
+  animation: dropdownItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
