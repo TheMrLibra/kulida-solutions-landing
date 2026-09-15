@@ -105,6 +105,11 @@ button,
   background-repeat: no-repeat;
 }
 
+/* Mask to smoothly fade Hero painterly art into Duna canvas */
+.hero-mask-gradient {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
 /* Duna Grid Overlay Pattern */
 .bg-grid-pattern {
   background-size: 40px 40px;
@@ -113,18 +118,15 @@ button,
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 
+.bg-duna-offwhite {
+  background-color: #ffffff;
+}
+
 /* Soft light scrim behind the hero copy for legibility. It is a gentle glow
    centred on the text — it deliberately does NOT fade the hero to white at the
    bottom, so the river image runs to the section edge and continues into the
    second slide's continuation image. */
-.hero-mask-gradient {
-  /* soft glow behind the copy only — NO fade at the bottom, so the hero image
-     meets the continuation image directly (no mist stacking → no white stripe) */
-  background: radial-gradient(ellipse 78% 60% at 50% 46%,
-    rgba(251, 251, 249, 0.55) 0%,
-    rgba(251, 251, 249, 0.28) 45%,
-    rgba(251, 251, 249, 0) 72%);
-}
+
 
 /* ==========================================================================
    SECOND-SLIDE MIST DISPERSION
@@ -136,15 +138,13 @@ button,
 .value-mist-gradient {
   /* Fully clear at the very top so the continuation image meets the hero with
      NO mist at the seam; the mist builds only lower down, toward the content. */
-  background: linear-gradient(
-    180deg,
-    rgba(251, 251, 249, 0) 0%,
-    rgba(251, 251, 249, 0) 18%,
-    rgba(251, 251, 249, 0.26) 36%,
-    rgba(251, 251, 249, 0.58) 54%,
-    rgba(251, 251, 249, 0.88) 70%,
-    rgba(251, 251, 249, 1) 84%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 18%,
+      rgba(255, 255, 255, 0.26) 36%,
+      rgba(255, 255, 255, 0.58) 54%,
+      rgba(255, 255, 255, 0.88) 70%,
+      rgba(255, 255, 255, 1) 84%);
 }
 
 /* Duna Glassmorphism Utility */
@@ -167,6 +167,7 @@ button,
     opacity: 0;
     transform: translateY(14px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -185,6 +186,8 @@ button,
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
