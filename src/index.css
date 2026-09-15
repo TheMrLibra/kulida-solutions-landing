@@ -191,3 +191,17 @@ button,
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* Arrow Transformation Beam Animation */
+@keyframes arrowNudge {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.animate-arrow-nudge {
+  animation: arrowNudge 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
