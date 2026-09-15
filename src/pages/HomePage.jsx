@@ -9,8 +9,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ValueProposition />
       <ServicesBentoGrid />
+      <ValueProposition />
       <WorkflowProcess />
       <ContactSection />
     </>
