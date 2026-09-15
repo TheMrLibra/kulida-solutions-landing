@@ -20,12 +20,12 @@ export default function ContactSection() {
         const scrollOffset = windowHeight - rect.top;
 
         if (bgRef.current) {
-          // Background layer moves slower (depth effect)
-          bgRef.current.style.transform = `translate3d(0, ${scrollOffset * 0.1}px, 0)`;
+          // Background layer moves s-upwards to prevent top edge exposure
+          bgRef.current.style.transform = `translate3d(0, ${-scrollOffset * 0.08}px, 0)`;
         }
         if (fgRef.current) {
-          // Foreground layer moves faster for 3D parallax depth
-          fgRef.current.style.transform = `translate3d(0, ${scrollOffset * 0.22}px, 0)`;
+          // Foreground layer moves faster upwards for 3D depth
+          fgRef.current.style.transform = `translate3d(0, ${-scrollOffset * 0.15}px, 0)`;
         }
       }
       ticking = false;
@@ -50,12 +50,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative py-24 sm:py-36 overflow-hidden z-10 bg-duna-offwhite border-duna-border">
+    <section ref={sectionRef} id="contact" className="relative py-24 sm:py-36 overflow-hidden z-10 bg-white border-duna-border">
 
       {/* 1. Background Parallax Layer */}
       <div
         ref={bgRef}
-        className="absolute inset-0 bg-cover bg-center pointer-events-none z-0 opacity-90 transition-transform ease-out duration-75"
+        className="absolute -inset-y-20 inset-x-0 bg-cover bg-center pointer-events-none z-0 opacity-90 transition-transform ease-out duration-75"
         style={{
           backgroundImage: "url('/images/CTA-background.png')",
           willChange: 'transform'
@@ -65,15 +65,20 @@ export default function ContactSection() {
       {/* 2. Foreground Parallax Layer */}
       <div
         ref={fgRef}
-        className="absolute inset-0 bg-cover bg-bottom pointer-events-none z-10 opacity-95 transition-transform ease-out duration-75"
+        className="absolute -inset-y-20 inset-x-0 bg-cover bg-bottom pointer-events-none z-10 opacity-95 transition-transform ease-out duration-75"
         style={{
           backgroundImage: "url('/images/CTA-foreground.png')",
           willChange: 'transform'
         }}
       />
 
-      {/* Soft Ambient Fade Mask to maintain high legibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/70 pointer-events-none z-15" />
+      {/* Soft Ambient Fade Mask (Solid White at top 0-20% → soft image in middle → Solid White at bottom 90-100%) */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[15]"
+        style={{
+          background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 20%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0.75) 80%, #ffffff 92%, #ffffff 100%)'
+        }}
+      />
 
       {/* 3. Form Content Container Layer */}
       <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

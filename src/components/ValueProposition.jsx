@@ -43,12 +43,12 @@ export default function ValueProposition() {
   const parallaxY = -progress * 46;
 
   return (
-    <section ref={sectionRef} id="value" style={{ marginTop: '-1px' }} className="relative z-10 overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 border-duna-border">
+    <section ref={sectionRef} id="value" style={{ marginTop: '-1px' }} className="relative z-10 overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 border-duna-border bg-white">
       {/* Continuation image — a closer view of the hero's river (parallax).
           Only ever shifts up, so the bottom (not the top seam) is what may
           expose an edge, and that sits under the opaque mist. */}
       <div
-        className="absolute inset-0 bg-hero-continuation pointer-events-none"
+        className="absolute -inset-y-20 inset-x-0 bg-hero-continuation pointer-events-none"
         style={{ transform: `translate3d(0, ${parallaxY}px, 0)`, willChange: 'transform' }}
       />
       {/* Dispersion gradient: image at the top → white toward the content */}
