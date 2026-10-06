@@ -131,37 +131,37 @@ export default function RagSystemsPage() {
     }
   ];
 
-  const complexityLevels = [
+  const aiComplexityLevels = [
     {
       number: "01",
       title: "Simple assistant",
       inputs: ["Documents"],
       output: "Answer",
-      desc: "Lightweight conversational search over clean documents without complex access rules."
+      desc: "Search and answer over a defined set of documents."
     },
     {
       number: "02",
       title: "Production retrieval",
       inputs: ["Documents", "OCR", "Permissions", "Sync"],
       output: "Answer with sources",
-      desc: "Enterprise retrieval with role-based filtering, scanned document support, and verifiable citations."
+      desc: "Built for real document estates, access rules and continuously changing content."
     },
     {
       number: "03",
       title: "Cross-system automation",
       inputs: ["Documents", "ERP", "APIs", "Tools"],
-      output: "Answer / action",
-      desc: "Agentic workflows querying live business systems and executing actions across tools."
-    },
-    {
-      number: "04",
-      title: "Sometimes not AI",
-      inputs: ["Database", "Search", "Script"],
-      output: "Simpler solution",
-      isAlternative: true,
-      desc: "When standard database queries or structured search are faster, cheaper, and 100% predictable."
+      output: "Answer / Action",
+      desc: "Combine knowledge with live business data and actions across systems."
     }
   ];
+
+  const alternativeLevel = {
+    number: "04",
+    title: "Sometimes not AI",
+    inputs: ["Database", "Search", "Script"],
+    output: "Simpler solution",
+    desc: "If conventional software is faster, cheaper and more predictable, we use that instead."
+  };
 
   return (
     <div className="pb-16 bg-[#ffffff] text-gray-900 selection:bg-gray-900 selection:text-white">
@@ -749,8 +749,8 @@ export default function RagSystemsPage() {
                 <div
                   key={idx}
                   className={`relative pt-6 lg:pt-8 text-left transition-all duration-700 transform ${isWorkflowVisible
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-6'
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-6'
                     }`}
                   style={{ transitionDelay: `${delay}ms` }}
                 >
@@ -811,7 +811,7 @@ export default function RagSystemsPage() {
                   A generic chatbot is easy to build.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                  A useful production system has to fit your data, permissions, infrastructure and workflows.
+                  A production system has to fit your data, permissions, infrastructure and workflows.
                 </p>
               </div>
 
@@ -824,18 +824,18 @@ export default function RagSystemsPage() {
 
             {/* Right Column: Progressive Continuum of Complexity */}
             <div className="lg:col-span-7">
-              {/* Top Label */}
+              {/* Top Label for 01-03 */}
               <div className="text-xs font-mono uppercase tracking-wider text-gray-500 mb-8 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
                 <span>From simple retrieval to full workflow integration</span>
               </div>
 
-              {/* Stepper Continuum */}
+              {/* Steps 01 to 03 with connecting vertical line */}
               <div className="relative space-y-8 sm:space-y-10">
                 {/* Thin Vertical Continuum Line */}
                 <div className="absolute left-[5px] top-2 bottom-3 w-[1px] bg-gray-200 pointer-events-none" />
 
-                {complexityLevels.map((level, idx) => (
+                {aiComplexityLevels.map((level, idx) => (
                   <div key={idx} className="relative pl-8 sm:pl-10">
                     {/* Node marker on the line */}
                     <span className="absolute left-[1px] top-1.5 w-2.5 h-2.5 rounded-full bg-gray-900 ring-4 ring-white" />
@@ -858,20 +858,12 @@ export default function RagSystemsPage() {
                             {inp}
                           </span>
                           {i < level.inputs.length - 1 && (
-                            <span className="text-gray-400 font-sans text-xs">
-                              {level.isAlternative ? '/' : '+'}
-                            </span>
+                            <span className="text-gray-400 font-sans text-xs">+</span>
                           )}
                         </React.Fragment>
                       ))}
                       <span className="text-gray-400 font-sans text-xs mx-0.5">→</span>
-                      <span
-                        className={`px-2 py-0.5 rounded font-medium ${
-                          level.isAlternative
-                            ? 'bg-gray-800 text-white'
-                            : 'bg-[#1c1917] text-white'
-                        }`}
-                      >
+                      <span className="px-2 py-0.5 rounded font-medium bg-[#1c1917] text-white">
                         {level.output}
                       </span>
                     </div>
@@ -883,6 +875,49 @@ export default function RagSystemsPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Alternative Branch: Step 04 */}
+              <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-gray-100">
+
+                <div className="relative pl-8 sm:pl-10">
+                  {/* Distinct Node Symbol: open geometric square node */}
+                  <span className="absolute left-[1px] top-1.5 w-2.5 h-2.5 rounded-sm border-2 border-gray-900 bg-white ring-4 ring-white" />
+
+                  {/* Step Number & Title */}
+                  <div className="flex items-baseline gap-2.5 mb-1">
+                    <span className="font-mono text-xs font-medium text-gray-400">
+                      {alternativeLevel.number}
+                    </span>
+                    <h4 className="text-lg font-semibold text-gray-900 tracking-tight">
+                      {alternativeLevel.title}
+                    </h4>
+                  </div>
+
+                  {/* Complexity Formula Tags */}
+                  <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-gray-700 my-2">
+                    {alternativeLevel.inputs.map((inp, i, arr) => (
+                      <React.Fragment key={i}>
+                        <span className="px-2 py-0.5 rounded bg-gray-100/90 border border-gray-200/60 text-gray-800 font-medium">
+                          {inp}
+                        </span>
+                        {i < arr.length - 1 && (
+                          <span className="text-gray-400 font-sans text-xs">/</span>
+                        )}
+                      </React.Fragment>
+                    ))}
+                    <span className="text-gray-400 font-sans text-xs mx-0.5">→</span>
+                    <span className="px-2 py-0.5 rounded font-medium bg-gray-800 text-white">
+                      {alternativeLevel.output}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {alternativeLevel.desc}
+                  </p>
+                </div>
+              </div>
+
             </div>
 
           </div>
