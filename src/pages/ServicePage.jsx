@@ -3,9 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
 import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
+import RagSystemsPage from './RagSystemsPage';
 
 export default function ServicePage() {
   const { slug } = useParams();
+
+  if (slug === 'rag-systems') {
+    return <RagSystemsPage />;
+  }
 
   const service = servicesData.find((s) => s.slug === slug);
 

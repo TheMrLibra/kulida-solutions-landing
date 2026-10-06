@@ -77,12 +77,22 @@ button,
   /* Hero Background (Place file at public/images/hero-bg.jpg) */
   --hero-bg-url: url('/images/hero-bg.png'), url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80');
 
+  /* RAG Hero Background */
+  --rag-hero-url: url('/images/rag_hero.png');
+
   /* CTA Cloud Parallax Background (Place file at public/images/cta-clouds.jpg) */
   --cta-clouds-bg-url: url('/images/cta-clouds.jpg'), url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1920&q=80');
 }
 
 .bg-hero-painterly {
   background-image: var(--hero-bg-url);
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.bg-rag-hero {
+  background-image: var(--rag-hero-url);
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
