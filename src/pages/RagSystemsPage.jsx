@@ -68,12 +68,8 @@ export default function RagSystemsPage() {
     { label: "Infrastructure control", onprem: "Maximum", hybrid: "High / configurable", cloud: "Cloud-based" }
   ];
 
-  // Concise, high-value FAQs
+  // Concise, high-value FAQs (Top 5 essential questions)
   const faqs = [
-    {
-      q: "Is this just a chatbot over documents?",
-      a: "It can be, if that is all you need. But the same architecture can go much further. The system can combine document retrieval with databases, APIs, live business data, calculations, and multi-step workflows. For more advanced use cases, we build agentic RAG systems that decide which sources and tools are required to answer a question."
-    },
     {
       q: "How is this different from uploading documents to ChatGPT?",
       a: "A custom production system is integrated directly into your organisation. It includes automatic document synchronisation, role-based access controls, local or cloud OCR, database and API connectivity, verifiable citations, and your preferred deployment architecture. It becomes part of your infrastructure rather than a manual process of uploading files into a public third-party chatbot."
@@ -85,18 +81,6 @@ export default function RagSystemsPage() {
     {
       q: "Do our documents have to leave our infrastructure?",
       a: "No. With a fully on-premise deployment, the complete solution operates entirely inside your environment — including document processing, OCR, databases, search, integrations, and locally hosted language models."
-    },
-    {
-      q: "Can the system work with databases and APIs?",
-      a: "Yes. The AI can query SQL databases, internal REST/GraphQL APIs, external web services, and custom tools as part of its reasoning workflow. This is especially useful when answers require current transactional data alongside document context."
-    },
-    {
-      q: "Can the AI take actions?",
-      a: "Potentially, yes. An agent can connect to tools that execute actions, not just read information. Whether an action is executed automatically, requires user confirmation, or remains strictly read-only depends on the workflow and the risk involved. We design those guardrails directly into the system."
-    },
-    {
-      q: "Can we change the AI model later?",
-      a: "Yes. The system is designed so the language model is not permanently tied to one provider. You can start with a hosted API during the pilot and later move inference to private infrastructure as pricing or model quality changes."
     },
     {
       q: "Do we need to organise all our documents first?",
@@ -111,23 +95,23 @@ export default function RagSystemsPage() {
   const projectSteps = [
     {
       number: "01",
-      title: "Initial consultation",
-      description: "We map the questions your team asks, where the answers live, and what systems need access."
+      title: "Understand",
+      description: "We map the questions people ask, where knowledge lives, and what systems need access."
     },
     {
       number: "02",
-      title: "Focused pilot",
-      description: "We build a working prototype around real questions from your team and measure the results."
+      title: "Pilot",
+      description: "We build a limited prototype around real questions from your team and rigorously measure results."
     },
     {
       number: "03",
-      title: "Production rollout",
-      description: "We add the required integrations, access controls, deployment architecture and monitoring."
+      title: "Production",
+      description: "We deploy the architecture with access controls, enterprise tool integrations, and monitoring."
     },
     {
       number: "04",
-      title: "Ongoing improvement",
-      description: "New data sources, business tools, model updates and retrieval improvements are added as your company evolves."
+      title: "Improve",
+      description: "New data sources, business tools, and model updates are added as your company evolves."
     }
   ];
 
@@ -330,9 +314,9 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 3. SO WHAT IS RAG? (NATURAL, SIMPLE EXPLANATION — NO CARDS)      */}
+      {/* 3. SO WHAT IS RAG? (NATURAL, SIMPLE EXPLANATION)                  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
@@ -357,7 +341,7 @@ export default function RagSystemsPage() {
             </p>
           </div>
 
-          <div className="py-4 text-xs sm:text-sm font-mono text-gray-600 bg-gray-50 p-4 rounded-xl border border-gray-200/80">
+          <div className="py-4 text-xs sm:text-sm font-mono text-gray-600 bg-white p-4 rounded-xl border border-gray-200/80">
             <strong>Question</strong> → Find the right information → <strong>Answer</strong> → Source citation
           </div>
 
@@ -369,48 +353,7 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 4. AGENTIC RAG — EXPLAINED THROUGH AN EXAMPLE (NOT A DEFINITION)   */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-t border-b border-gray-200/70">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
-            Sometimes the answer is not in a document.
-          </h2>
-
-          <div className="py-4 my-2 pl-6 border-l-2 border-blue-500 space-y-2 bg-white/60 p-4 rounded-r-2xl">
-            <p className="text-xs font-mono uppercase tracking-wider text-blue-600 font-semibold">Imagine someone asks:</p>
-            <p className="text-xl sm:text-2xl font-medium text-gray-900">
-              “Which customers have unpaid invoices and a contract renewal coming up in the next 60 days?”
-            </p>
-          </div>
-
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            Part of the answer may be in customer contracts. But current invoice information probably lives in your ERP or accounting system.
-          </p>
-
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            So the AI needs to do more than search documents. It can:
-          </p>
-
-          <ul className="space-y-2 pl-5 list-disc text-gray-700 text-base">
-            <li>find the relevant contracts;</li>
-            <li>query the live invoice data;</li>
-            <li>compare the dates;</li>
-            <li>combine the results;</li>
-            <li>return one clear answer.</li>
-          </ul>
-
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed pt-2">
-            This is often called <strong>agentic RAG</strong>. The user still asks one normal question. The system decides which information and tools it needs behind the scenes.
-          </p>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 5. WHAT COULD THIS LOOK LIKE IN YOUR COMPANY? (4 REAL SCENARIOS)   */}
-      {/* (Stacked naturally, no pseudo-interface tabs!)                    */}
+      {/* 4. WHAT COULD THIS LOOK LIKE IN YOUR COMPANY? (REAL SCENARIOS)    */}
       {/* ================================================================= */}
       <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -427,7 +370,7 @@ export default function RagSystemsPage() {
                 “Which contracts contain a 90-day notice period?”
               </h3>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Search hundreds of agreements by meaning and jump directly to the relevant clauses.
+                Search hundreds of agreements by meaning rather than exact file names, jumping directly to the relevant clauses.
               </p>
             </div>
 
@@ -437,17 +380,17 @@ export default function RagSystemsPage() {
                 “What did we promise this customer about response times?”
               </h3>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Combine the contract, later amendments and related correspondence into one answer with sources.
+                Combine the original contract, later amendments and related correspondence into one answer with verifiable sources.
               </p>
             </div>
 
             {/* Scenario 3 */}
             <div className="pt-8">
               <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                “Which customers have unpaid invoices and contracts expiring this quarter?”
+                “Which of our pump models support 3-phase power and meet these requirements?”
               </h3>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Combine contract termination dates with live accounting and ERP data.
+                Retrieve technical specifications from product catalogues and manuals while the salesperson is still speaking with the customer.
               </p>
             </div>
 
@@ -457,7 +400,7 @@ export default function RagSystemsPage() {
                 “How do we handle a failed pressure test?”
               </h3>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Find the correct internal procedure without asking the same experienced colleague again.
+                Find the exact safety procedures and internal guidelines without repeatedly interrupting experienced colleagues.
               </p>
             </div>
 
@@ -476,318 +419,118 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 6. WE WORK WITH THE SYSTEMS YOU ALREADY HAVE (QUIET, 3 COLUMNS)   */}
+      {/* 5. SOMETIMES THE ANSWER IS NOT IN A DOCUMENT (AGENTIC FLOW)       */}
       {/* ================================================================= */}
       <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="max-w-3xl mb-12">
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-3">
-              We work with the systems you already have.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              You do not need to move everything into a new platform first. Depending on the use case, we can connect the AI to:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-
-            {/* Column 1 */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Documents
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                PDFs, scans, Word, Excel, email, SharePoint, Google Drive and shared folders.
-              </p>
-            </div>
-
-            {/* Column 2 */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Business data
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                SQL databases, CRM, ERP, accounting systems, ticketing systems and product data.
-              </p>
-            </div>
-
-            {/* Column 3 */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                APIs and tools
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Internal services, external APIs, calculations and custom workflows.
-              </p>
-            </div>
-
-          </div>
-
-          <p className="text-sm text-gray-600 pt-4 border-t border-gray-200/80">
-            And if your information is locked inside scanned documents, OCR can be part of the solution too.
-          </p>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 7. BUILT FOR REAL COMPANY DATA, NOT A DEMO FOLDER                  */}
-      {/* (Authentic, grounded editorial section — NO CARDS)               */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-              Built for real company data, not a demo folder.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl">
-              Real company information is messy. There are scanned PDFs. Old versions of documents. Different access rights. Data in several systems. Information that changes every day. A production system has to deal with that.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-gray-100">
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                Answers you can check
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                For document-based answers, the system can show the original source and relevant passage.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                Permissions that matter
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Different employees can have access to different information. We design access control into the retrieval layer.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                Scanned documents are still documents
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                OCR can be part of the stack and, where required, can run entirely inside your infrastructure.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 8. RUN IT WHERE IT MAKES SENSE (NO "RECOMMENDED" BIAS)            */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-              Run it where it makes sense.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl">
-              Some companies need everything inside their own infrastructure. Others want to keep the data internal but use an external language model. And for others, a cloud deployment is the simplest option. We support all three.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                On-premise
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                The complete stack can run inside your environment — including OCR, retrieval, application and the language model.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                Hybrid
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Keep your documents and core systems inside your environment while connecting to an external model or selected cloud services.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
-                Cloud
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Run the complete solution in your preferred cloud environment without maintaining local AI infrastructure.
-              </p>
-            </div>
-
-          </div>
-
-          <p className="text-sm text-gray-800 font-medium pt-2">
-            We do not sell one deployment model. We choose the architecture that fits your requirements.
-          </p>
-
-          {/* Optional Expandable Comparison Table */}
-          <div className="pt-4">
-            <button
-              onClick={() => setShowComparisonTable(!showComparisonTable)}
-              className="text-xs font-mono text-gray-600 hover:text-black flex items-center gap-1.5 transition-colors cursor-pointer py-1"
-            >
-              <span>{showComparisonTable ? "Hide" : "Show"} architectural comparison table</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showComparisonTable ? 'rotate-180' : ''}`} />
-            </button>
-
-            {showComparisonTable && (
-              <div className="mt-4 p-6 bg-white rounded-2xl border border-gray-200 overflow-x-auto text-xs sm:text-sm">
-                <table className="w-full text-left min-w-[580px]">
-                  <thead>
-                    <tr className="border-b border-gray-200 font-mono text-gray-500 uppercase text-xs">
-                      <th className="py-2.5 px-3">Layer</th>
-                      <th className="py-2.5 px-3">On-premise</th>
-                      <th className="py-2.5 px-3">Hybrid</th>
-                      <th className="py-2.5 px-3">Cloud</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100 text-xs">
-                    {comparisonRows.map((r, idx) => (
-                      <tr key={idx}>
-                        <td className="py-2.5 px-3 font-medium text-gray-900">{r.label}</td>
-                        <td className="py-2.5 px-3 text-gray-600">{r.onprem}</td>
-                        <td className="py-2.5 px-3 text-gray-900 font-medium bg-gray-50/50">{r.hybrid}</td>
-                        <td className="py-2.5 px-3 text-gray-600">{r.cloud}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 9. START SMALL. PROVE IT ON YOUR OWN DATA. (CREDIBLE PILOT)       */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
-            Start small. Prove it on your own data.
+            Sometimes the answer is not in a document.
           </h2>
 
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            Before building a large production system, we usually recommend proving the use case on a limited scope.
-          </p>
-
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            We take a real set of documents, systems or data and collect questions your team actually needs answered. Then we measure what works.
-          </p>
-
-          <div className="p-6 bg-gray-50 rounded-2xl border border-gray-200 space-y-2 text-sm sm:text-base font-mono text-gray-800">
-            <div className="font-semibold text-gray-900 mb-2 font-sans">For example: 30 real questions from your team</div>
-            <div className="text-xs sm:text-sm text-gray-600 space-y-1 font-mono">
-              <div>→ How many were answered correctly?</div>
-              <div>→ Were the right sources found?</div>
-              <div>→ Which questions failed, and why?</div>
-              <div>→ What would production deployment require?</div>
+          {/* Visual Example Card & Flow */}
+          <div className="p-6 sm:p-8 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-6">
+            
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Question:</p>
+              <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-snug">
+                “Which customers have unpaid invoices and contracts renewing in the next 60 days?”
+              </p>
             </div>
+
+            {/* Flow */}
+            <div className="pt-4 border-t border-gray-100">
+              <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">System Flow:</p>
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm text-gray-700">
+                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">Contracts</span>
+                <span className="text-gray-400 text-base font-sans">+</span>
+                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">ERP Invoices</span>
+                <span className="text-gray-400 text-base font-sans">+</span>
+                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">Current Dates</span>
+                <span className="text-gray-400 text-base font-sans mx-1">→</span>
+                <span className="px-3 py-1.5 rounded-lg bg-gray-900 text-white font-medium">One verified answer</span>
+              </div>
+            </div>
+
           </div>
 
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed pt-2">
-            At the end, you have a working prototype and actual evidence for whether the project is worth continuing.
-          </p>
-
-          <div className="pt-2">
-            <a
-              href="#contact"
-              className="bg-[#1c1917] hover:bg-black text-white text-sm font-medium px-7 py-3.5 rounded-full inline-flex items-center gap-2 shadow-sm"
-            >
-              <span>Discuss a pilot</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 10. HOW THE PROJECT WORKS (HOMEPAGE WORKFLOW TIMELINE STYLE)      */}
-      {/* ================================================================= */}
-      <section
-        ref={workflowRef}
-        id="workflow"
-        className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70 relative z-10 overflow-hidden"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Section Header */}
-          <div className={`max-w-3xl mb-16 sm:mb-20 transition-all duration-700 transform ${isWorkflowVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-duna-dark leading-tight">
-              How the project works
-            </h2>
-          </div>
-
-          {/* Continuous Horizontal Timeline Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 relative">
-
-            {/* Continuous Base Horizontal Line Across All Columns (Animated draw from left to right) */}
-            <div
-              className={`absolute top-0 left-0 right-0 h-[1px] bg-gray-200 origin-left transition-transform duration-1000 ease-out pointer-events-none ${isWorkflowVisible ? 'scale-x-100' : 'scale-x-0'
-                }`}
-            />
-
-            {projectSteps.map((step, idx) => {
-              const delay = 300 + idx * 200;
-
-              return (
-                <div
-                  key={idx}
-                  className={`relative pt-6 lg:pt-8 text-left transition-all duration-700 transform ${isWorkflowVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-6'
-                    }`}
-                  style={{ transitionDelay: `${delay}ms` }}
-                >
-                  {/* Round Bullet Node Marker (Animated pop-in when line reaches it) */}
-                  <div
-                    className={`absolute -top-[4px] left-0 w-2.5 h-2.5 bg-gray-900 rounded-full z-10 transition-transform duration-500 ease-out ${isWorkflowVisible ? 'scale-100' : 'scale-0'
-                      }`}
-                    style={{ transitionDelay: `${delay}ms` }}
-                  />
-
-                  {/* Step Number (01, 02, 03, 04) in Monospace */}
-                  <div className="font-mono text-xs text-gray-400 font-medium mb-3">
-                    {step.number}
-                  </div>
-
-                  {/* Step Title */}
-                  <h3 className="text-2xl font-medium tracking-tight text-gray-900 mb-3">
-                    {step.title}
-                  </h3>
-
-                  {/* Step Description */}
-                  <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-normal">
-                    {step.description}
-                  </p>
-                </div>
-              );
-            })}
-
+          {/* 2 sentences about Agentic RAG */}
+          <div className="space-y-3 text-base sm:text-lg text-gray-600 leading-relaxed">
+            <p>
+              Part of the answer lives in customer contracts, but current invoice data lives in your ERP or accounting system.
+            </p>
+            <p>
+              This is <strong>Agentic RAG</strong>. The system doesn't just search files — it queries APIs, checks live data, and reasons across multiple systems before producing a verified answer.
+            </p>
           </div>
 
         </div>
       </section>
 
       {/* ================================================================= */}
-      {/* 11. WE ARE NOT SELLING YOU A CHATBOT (CONTINUUM OF COMPLEXITY)    */}
+      {/* 6. BUILT AROUND THE SYSTEMS AND DATA YOU ALREADY HAVE             */}
       {/* ================================================================= */}
       <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="max-w-3xl mb-14">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
+              Built around the systems and data you already have.
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+              You do not need to migrate or clean up everything first. Real company knowledge is messy, lives across several systems, and changes daily. We connect directly to where it is:
+            </p>
+          </div>
+
+          {/* 3 Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 mb-12">
+
+            {/* Pillar 1: Documents */}
+            <div className="space-y-3">
+              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">01 / Storage</div>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Documents
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                PDFs, Word documents, Excel sheets, emails, SharePoint, Google Drive, and local network shared folders.
+              </p>
+            </div>
+
+            {/* Pillar 2: Business systems */}
+            <div className="space-y-3">
+              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">02 / Live Data</div>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Business systems
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                ERP systems, CRM platforms, SQL databases, ticketing queues, accounting tools, and internal business APIs.
+              </p>
+            </div>
+
+            {/* Pillar 3: Production requirements */}
+            <div className="space-y-3">
+              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">03 / Reliability</div>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Production requirements
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                OCR for scanned files, role-based access permissions, source citation audits, and continuous automatic synchronization.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="pt-6 border-t border-gray-100 text-sm text-gray-500">
+            Every answer is verified against your actual access rules — employees only see what their permissions allow.
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 7. WE ARE NOT SELLING YOU A CHATBOT (CONTINUUM OF COMPLEXITY)    */}
+      {/* ================================================================= */}
+      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -878,6 +621,11 @@ export default function RagSystemsPage() {
 
               {/* Alternative Branch: Step 04 */}
               <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-gray-100">
+                {/* Branch Label */}
+                <div className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-6 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                  <span>Or take a different route</span>
+                </div>
 
                 <div className="relative pl-8 sm:pl-10">
                   {/* Distinct Node Symbol: open geometric square node */}
@@ -927,6 +675,262 @@ export default function RagSystemsPage() {
             <p className="text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-gray-900 max-w-4xl leading-snug">
               We start with the problem and build only the complexity that is actually useful.
             </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 8. RUN IT WHERE IT MAKES SENSE (3 ELEVATED DEPLOYMENT CARDS)       */}
+      {/* ================================================================= */}
+      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-duna-dark leading-tight mb-4">
+              Run it where it makes sense.
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+              We do not force you into one platform or deployment model.
+            </p>
+          </div>
+
+          {/* 3 Distinct Elevated Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
+
+            {/* Card 1: On-premise */}
+            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-400/50 transition-colors">
+              <div>
+                <div className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">Model 01</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">On-premise</h3>
+                <p className="text-base text-gray-700 font-medium mb-4">
+                  Everything stays inside your infrastructure.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 pt-4">
+                  <li>• Air-gapped or private network servers</li>
+                  <li>• Local open-source AI models</li>
+                  <li>• Zero data transmitted externally</li>
+                  <li>• Maximum regulatory compliance & sovereignty</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Card 2: Hybrid */}
+            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-400/50 transition-colors">
+              <div>
+                <div className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">Model 02</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">Hybrid</h3>
+                <p className="text-base text-gray-700 font-medium mb-4">
+                  Keep your data internal, use external models where useful.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 pt-4">
+                  <li>• Documents and vector indices remain on-prem</li>
+                  <li>• Heavy reasoning via secure private APIs</li>
+                  <li>• High performance without local GPU clusters</li>
+                  <li>• Balanced operational cost & data governance</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Card 3: Cloud */}
+            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-400/50 transition-colors">
+              <div>
+                <div className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">Model 03</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">Cloud</h3>
+                <p className="text-base text-gray-700 font-medium mb-4">
+                  Run the complete stack in your preferred cloud environment.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 pt-4">
+                  <li>• AWS, Azure, GCP or private EU cloud</li>
+                  <li>• Scalable, fully managed container setup</li>
+                  <li>• High availability and continuous monitoring</li>
+                  <li>• Fast rollout with zero hardware overhead</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Optional Expandable Comparison Table */}
+          <div className="pt-2">
+            <button
+              onClick={() => setShowComparisonTable(!showComparisonTable)}
+              className="text-xs font-mono text-gray-600 hover:text-black flex items-center gap-1.5 transition-colors cursor-pointer py-1"
+            >
+              <span>{showComparisonTable ? "Hide" : "Show"} architectural comparison table</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showComparisonTable ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showComparisonTable && (
+              <div className="mt-4 p-6 bg-white rounded-2xl border border-gray-200 overflow-x-auto text-xs sm:text-sm">
+                <table className="w-full text-left min-w-[580px]">
+                  <thead>
+                    <tr className="border-b border-gray-200 font-mono text-gray-500 uppercase text-xs">
+                      <th className="py-2.5 px-3">Layer</th>
+                      <th className="py-2.5 px-3">On-premise</th>
+                      <th className="py-2.5 px-3">Hybrid</th>
+                      <th className="py-2.5 px-3">Cloud</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 text-xs">
+                    {comparisonRows.map((r, idx) => (
+                      <tr key={idx}>
+                        <td className="py-2.5 px-3 font-medium text-gray-900">{r.label}</td>
+                        <td className="py-2.5 px-3 text-gray-600">{r.onprem}</td>
+                        <td className="py-2.5 px-3 text-gray-900 font-medium bg-gray-50/50">{r.hybrid}</td>
+                        <td className="py-2.5 px-3 text-gray-600">{r.cloud}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 9. THE PILOT — HIGH-IMPACT DARK CONVERSION CENTERPIECE             */}
+      {/* ================================================================= */}
+      <section className="py-24 sm:py-32 bg-[#0D0D0C] text-white relative z-10 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="max-w-3xl mb-12">
+            <span className="text-xs font-mono uppercase tracking-widest text-gray-400 block mb-4">
+              LOW-RISK VALIDATION
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight mb-4">
+              Start with a small, measurable pilot.
+            </h2>
+            <p className="text-xl sm:text-2xl text-gray-300 font-normal leading-relaxed">
+              Your data. Your questions. A working prototype.
+            </p>
+          </div>
+
+          {/* Evidence Deliverables Grid */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#161614] border border-white/10 mb-10">
+            <div className="text-sm font-mono text-gray-400 uppercase tracking-wider mb-6">
+              What the pilot delivers:
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              
+              <div className="space-y-2">
+                <div className="text-2xl font-semibold text-white font-mono">20–30</div>
+                <div className="text-sm font-medium text-gray-200">Real questions</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Collected directly from your team's everyday work.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-2xl font-semibold text-white font-mono">Quality</div>
+                <div className="text-sm font-medium text-gray-200">→ Measured answers</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Exact accuracy rates and failure analysis on hard edge cases.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-2xl font-semibold text-white font-mono">Audit</div>
+                <div className="text-sm font-medium text-gray-200">→ Source verification</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Direct citations tracing each fact back to the original document.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-2xl font-semibold text-white font-mono">Roadmap</div>
+                <div className="text-sm font-medium text-gray-200">→ Architecture spec</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Concrete blueprint, hosting costs, and production scope.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Reassurance and CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-4 border-t border-white/10">
+            <p className="text-base sm:text-lg text-gray-300 font-medium">
+              No large commitment before you know it works.
+            </p>
+            <a
+              href="#contact"
+              className="bg-white hover:bg-gray-100 text-[#0D0D0C] text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 transition-all shadow-md shrink-0"
+            >
+              <span>Discuss a pilot on your data</span>
+              <ArrowRight className="w-4 h-4 text-gray-600" />
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 10. HOW THE PROJECT WORKS (STREAMLINED LINEAR PROGRESSION)        */}
+      {/* ================================================================= */}
+      <section
+        ref={workflowRef}
+        id="workflow"
+        className="py-20 sm:py-28 bg-white border-b border-gray-200/70 relative z-10 overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Header */}
+          <div className="max-w-3xl mb-16 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-duna-dark leading-tight">
+              How the project works
+            </h2>
+          </div>
+
+          {/* Continuous Horizontal Timeline Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 relative">
+
+            {/* Continuous Base Horizontal Line Across All Columns */}
+            <div
+              className={`absolute top-0 left-0 right-0 h-[1px] bg-gray-200 origin-left transition-transform duration-1000 ease-out pointer-events-none ${isWorkflowVisible ? 'scale-x-100' : 'scale-x-0'
+                }`}
+            />
+
+            {projectSteps.map((step, idx) => {
+              const delay = 200 + idx * 150;
+
+              return (
+                <div
+                  key={idx}
+                  className={`relative pt-6 lg:pt-8 text-left transition-all duration-700 transform ${isWorkflowVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-6'
+                    }`}
+                  style={{ transitionDelay: `${delay}ms` }}
+                >
+                  {/* Round Bullet Node Marker */}
+                  <div
+                    className={`absolute -top-[4px] left-0 w-2.5 h-2.5 bg-gray-900 rounded-full z-10 transition-transform duration-500 ease-out ${isWorkflowVisible ? 'scale-100' : 'scale-0'
+                      }`}
+                    style={{ transitionDelay: `${delay}ms` }}
+                  />
+
+                  {/* Step Number */}
+                  <div className="font-mono text-xs text-gray-400 font-medium mb-3">
+                    {step.number}
+                  </div>
+
+                  {/* Step Title */}
+                  <h3 className="text-2xl font-medium tracking-tight text-gray-900 mb-3">
+                    {step.title}
+                  </h3>
+
+                  {/* Crisp 1-2 sentence description */}
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              );
+            })}
+
           </div>
 
         </div>
