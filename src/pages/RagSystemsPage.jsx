@@ -4,7 +4,8 @@ import {
   ArrowRight,
   ArrowLeft,
   ChevronDown,
-  Check
+  Check,
+  FileText
 } from 'lucide-react';
 
 export default function RagSystemsPage() {
@@ -12,9 +13,14 @@ export default function RagSystemsPage() {
   const [showComparisonTable, setShowComparisonTable] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [activeScenarioIndex, setActiveScenarioIndex] = useState(0);
 
   const workflowRef = useRef(null);
   const [isWorkflowVisible, setIsWorkflowVisible] = useState(false);
+
+  const contactSectionRef = useRef(null);
+  const contactBgRef = useRef(null);
+  const contactFgRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,6 +51,24 @@ export default function RagSystemsPage() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setScrollY(window.scrollY);
+
+          // Parallax for contact section matching ContactSection.jsx
+          if (contactSectionRef.current) {
+            const rect = contactSectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (rect.top <= windowHeight && rect.bottom >= 0) {
+              const scrollOffset = windowHeight - rect.top;
+
+              if (contactBgRef.current) {
+                contactBgRef.current.style.transform = `translate3d(0, ${-scrollOffset * 0.08}px, 0)`;
+              }
+              if (contactFgRef.current) {
+                contactFgRef.current.style.transform = `translate3d(0, ${-scrollOffset * 0.15}px, 0)`;
+              }
+            }
+          }
+
           ticking = false;
         });
         ticking = true;
@@ -52,8 +76,93 @@ export default function RagSystemsPage() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Real business demonstration scenarios (Section 4)
+  const demoScenarios = [
+    {
+      id: 'contract-search',
+      title: 'Contract search',
+      question: '“Which contracts contain a 90-day notice period?”',
+      answer: [
+        'I found 3 active contracts with a 90-day termination clause:',
+        '• Supplier Agreement v3 — clause 11.1',
+        '• Kovo SLA — clause 9.4',
+        '• HQ Facility Lease — clause 14.2'
+      ],
+      sources: [
+        { name: 'Supplier_Agreement_2025.pdf', detail: 'clause 11.1', type: 'document' },
+        { name: 'Kovo_SLA_final.docx', detail: 'clause 9.4', type: 'document' },
+        { name: 'HQ_Facility_Lease.pdf', detail: 'clause 14.2', type: 'document' }
+      ],
+      note: 'Searches by meaning rather than relying only on exact keywords or file names.'
+    },
+    {
+      id: 'customer-commitments',
+      title: 'Customer commitments',
+      question: '“What did we promise this customer about response times?”',
+      answer: [
+        'The original service agreement specifies a 4-hour response time for critical incidents. Amendment 2 later changed weekend coverage from optional to included.'
+      ],
+      sources: [
+        { name: 'Service_Agreement.pdf', detail: 'section 5.2', type: 'document' },
+        { name: 'Amendment_2.pdf', detail: 'section 3', type: 'document' },
+        { name: 'Re_Support_Coverage.eml', detail: '', type: 'document' }
+      ],
+      note: 'Combines information from contracts, amendments and related correspondence.'
+    },
+    {
+      id: 'product-specifications',
+      title: 'Product specifications',
+      question: '“Which of our pump models support 3-phase power and meet these requirements?”',
+      answer: [
+        'Two models match the requested criteria:',
+        '• PX-420 — 400 V, 3-phase, max pressure 12 bar',
+        '• MX-310 — 400 V, 3-phase, max pressure 10 bar'
+      ],
+      sources: [
+        { name: 'Pump_Catalogue_2026.pdf', detail: '', type: 'document' },
+        { name: 'PX_Series_Technical_Manual.pdf', detail: '', type: 'document' }
+      ],
+      note: 'Retrieves product specifications from catalogues and technical documentation.'
+    },
+    {
+      id: 'internal-procedure',
+      title: 'Internal procedure',
+      question: '“How do we handle a failed pressure test?”',
+      answer: [
+        'According to the current quality procedure:',
+        '1. Stop the batch and mark it as non-conforming.',
+        '2. Notify the shift supervisor.',
+        '3. Record the test result in the quality system.',
+        '4. Follow procedure QP-17 before restarting production.'
+      ],
+      sources: [
+        { name: 'QP-17_Pressure_Test_Failure.pdf', detail: 'section 4', type: 'document' }
+      ],
+      note: 'Gives employees the current procedure without repeatedly interrupting experienced colleagues.'
+    },
+    {
+      id: 'cross-system-query',
+      title: 'Cross-system query',
+      question: '“Which customers have unpaid invoices and contracts expiring this quarter?”',
+      answer: [
+        'I found 2 customers matching both conditions:',
+        '• Acme Corp — contract expires in 42 days, 1 overdue invoice (€14,200)',
+        '• Novák Ltd. — contract expires in 58 days, 1 unpaid invoice (€4,500)'
+      ],
+      sources: [
+        { name: 'Acme_MSA_2024.pdf', detail: 'contract', type: 'document' },
+        { name: 'Novak_Service_Agreement.pdf', detail: 'contract', type: 'document' },
+        { name: 'ERP Invoicing API', detail: 'live data', type: 'live' }
+      ],
+      note: 'Combines document retrieval with live business data and tool calling.'
+    }
+  ];
+
+  const currentScenario = demoScenarios[activeScenarioIndex] || demoScenarios[0];
 
   // Deployment comparison table rows
   const comparisonRows = [
@@ -353,59 +462,182 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 4. WHAT COULD THIS LOOK LIKE IN YOUR COMPANY? (REAL SCENARIOS)    */}
+      {/* 4. WHAT COULD THIS LOOK LIKE IN YOUR COMPANY? (INTERACTIVE DEMO)  */}
       {/* ================================================================= */}
       <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-12">
-            What could this look like in your company?
-          </h2>
+          {/* Desktop Two-column / Mobile responsive layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-          <div className="space-y-10 divide-y divide-gray-100">
+            {/* Left Column: Heading, Intro, Scenario List */}
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
+                  What could this look like in your company?
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                  Explore a few examples of how employees can ask natural questions across contracts, documents, internal procedures and live systems.
+                </p>
+              </div>
 
-            {/* Scenario 1 */}
-            <div className="pt-8 first:pt-0">
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                “Which contracts contain a 90-day notice period?”
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Search hundreds of agreements by meaning rather than exact file names, jumping directly to the relevant clauses.
-              </p>
+              {/* Mobile Horizontal Pill Selector */}
+              <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                {demoScenarios.map((scenario, index) => {
+                  const isActive = activeScenarioIndex === index;
+                  return (
+                    <button
+                      key={scenario.id}
+                      type="button"
+                      onClick={() => setActiveScenarioIndex(index)}
+                      className={`shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${isActive
+                          ? 'bg-gray-900 text-white shadow-xs'
+                          : 'bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200/70'
+                        }`}
+                    >
+                      {scenario.title}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Desktop Vertical Scenario List */}
+              <div className="hidden lg:flex flex-col space-y-2 pt-2">
+                {demoScenarios.map((scenario, index) => {
+                  const isActive = activeScenarioIndex === index;
+                  return (
+                    <button
+                      key={scenario.id}
+                      type="button"
+                      onClick={() => setActiveScenarioIndex(index)}
+                      aria-selected={isActive}
+                      className={`group w-full text-left px-4 py-3.5 rounded-xl border transition-all text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 ${isActive
+                          ? 'bg-[#FBFBF9] border-gray-300 text-gray-900 shadow-xs'
+                          : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className={`font-mono text-xs ${isActive ? 'text-gray-900 font-semibold' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                            0{index + 1}
+                          </span>
+                          <span className={`font-medium ${isActive ? 'text-gray-900' : 'text-gray-600 group-hover:text-gray-900'}`}>
+                            {scenario.title}
+                          </span>
+                        </div>
+                        {isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-900"></span>
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Scenario 2 */}
-            <div className="pt-8">
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                “What did we promise this customer about response times?”
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Combine the original contract, later amendments and related correspondence into one answer with verifiable sources.
-              </p>
-            </div>
+            {/* Right Column: AI Workspace Preview */}
+            <div className="lg:col-span-7">
+              <div className="bg-[#FBFBF9] border border-gray-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs min-h-[460px]">
 
-            {/* Scenario 3 */}
-            <div className="pt-8">
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                “Which of our pump models support 3-phase power and meet these requirements?”
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Retrieve technical specifications from product catalogues and manuals while the salesperson is still speaking with the customer.
-              </p>
-            </div>
+                {/* Workspace Header / Meta bar */}
+                <div className="flex items-center justify-between pb-4 border-b border-gray-200/80 mb-6 text-xs font-mono uppercase tracking-wider text-gray-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span className="text-gray-700 font-medium">Internal Knowledge Workspace</span>
+                  </div>
+                  <span>Scenario 0{activeScenarioIndex + 1} / 05</span>
+                </div>
 
-            {/* Scenario 4 */}
-            <div className="pt-8">
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                “How do we handle a failed pressure test?”
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Find the exact safety procedures and internal guidelines without repeatedly interrupting experienced colleagues.
-              </p>
+                {/* Main Content with subtle transition */}
+                <div key={currentScenario.id} className="space-y-6 flex-1 transition-opacity duration-150">
+
+                  {/* User Question Area */}
+                  <div>
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
+                      Question
+                    </div>
+                    <p className="text-lg sm:text-xl font-medium text-gray-900 leading-snug">
+                      {currentScenario.question}
+                    </p>
+                  </div>
+
+                  {/* Assistant Response Area */}
+                  <div className="space-y-2 pt-1">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400">
+                      Answer
+                    </div>
+                    <div className="text-sm sm:text-base text-gray-800 leading-relaxed space-y-1.5">
+                      {currentScenario.answer.map((line, idx) => {
+                        const isListItem = line.startsWith('•') || /^\d+\./.test(line);
+                        return (
+                          <p
+                            key={idx}
+                            className={isListItem ? 'pl-2 text-gray-700 font-medium' : ''}
+                          >
+                            {line}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Sources & Live Data Section */}
+                  <div className="pt-4 border-t border-gray-200/80">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-2.5">
+                      Sources & verified data
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {currentScenario.sources.map((src, idx) => {
+                        const isLive = src.type === 'live';
+                        return (
+                          <div
+                            key={idx}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono transition-colors ${isLive
+                                ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950 font-medium'
+                                : 'bg-white border-gray-200/90 text-gray-700'
+                              }`}
+                          >
+                            {isLive ? (
+                              <>
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                                <span className="text-emerald-900">{src.name}</span>
+                                {src.detail && (
+                                  <span className="text-emerald-700/80 font-sans text-[11px] font-medium bg-emerald-100/60 px-1.5 py-0.5 rounded">
+                                    {src.detail}
+                                  </span>
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                <FileText className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                                <span className="text-gray-800">{src.name}</span>
+                                {src.detail && (
+                                  <span className="text-gray-500 font-sans text-[11px]">
+                                    — {src.detail}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Small Explanatory Note */}
+                <div className="pt-5 border-t border-gray-200/80 mt-6 flex items-start gap-2 text-xs text-gray-500 leading-relaxed">
+                  <span className="font-mono uppercase tracking-wider text-gray-400 shrink-0">Note:</span>
+                  <span>{currentScenario.note}</span>
+                </div>
+
+              </div>
             </div>
 
           </div>
 
+          {/* Closing Copy */}
           <div className="mt-14 pt-8 border-t border-gray-200 text-gray-800 text-base sm:text-lg leading-relaxed">
             <p className="font-medium text-gray-900 mb-1">
               Your questions will be different. That is the point.
@@ -430,7 +662,7 @@ export default function RagSystemsPage() {
 
           {/* Visual Example Card & Flow */}
           <div className="p-6 sm:p-8 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-6">
-            
+
             <div>
               <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Question:</p>
               <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-snug">
@@ -815,7 +1047,7 @@ export default function RagSystemsPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              
+
               <div className="space-y-2">
                 <div className="text-2xl font-semibold text-white font-mono">20–30</div>
                 <div className="text-sm font-medium text-gray-200">Real questions</div>
@@ -901,8 +1133,8 @@ export default function RagSystemsPage() {
                 <div
                   key={idx}
                   className={`relative pt-6 lg:pt-8 text-left transition-all duration-700 transform ${isWorkflowVisible
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-6'
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-6'
                     }`}
                   style={{ transitionDelay: `${delay}ms` }}
                 >
@@ -980,8 +1212,38 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 13. FINAL CLOSING & CONSULTATION BOOKING FORM                     */}
       {/* ================================================================= */}
-      <section id="contact" className="py-20 sm:py-28 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={contactSectionRef} id="contact" className="relative py-24 sm:py-36 overflow-hidden z-10 bg-white border-duna-border">
+
+        {/* 1. Background Parallax Layer */}
+        <div
+          ref={contactBgRef}
+          className="absolute -inset-y-20 inset-x-0 bg-cover bg-center pointer-events-none z-0 opacity-90 transition-transform ease-out duration-75"
+          style={{
+            backgroundImage: "url('/images/CTA-background.png')",
+            willChange: 'transform'
+          }}
+        />
+
+        {/* 2. Foreground Parallax Layer */}
+        <div
+          ref={contactFgRef}
+          className="absolute -inset-y-20 inset-x-0 bg-cover bg-bottom pointer-events-none z-10 opacity-95 transition-transform ease-out duration-75"
+          style={{
+            backgroundImage: "url('/images/CTA-foreground.png')",
+            willChange: 'transform'
+          }}
+        />
+
+        {/* Soft Ambient Fade Mask (Solid White at top 0-20% → soft image in middle → Solid White at bottom 90-100%) */}
+        <div
+          className="absolute inset-0 pointer-events-none z-[15]"
+          style={{
+            background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 20%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0.75) 80%, #ffffff 92%, #ffffff 100%)'
+          }}
+        />
+
+        {/* 3. Form Content Container Layer */}
+        <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-left mb-10 space-y-3">
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
@@ -992,7 +1254,7 @@ export default function RagSystemsPage() {
             </p>
           </div>
 
-          <div className="bg-[#FBFBF9] rounded-3xl p-8 sm:p-10 border border-gray-200 shadow-sm">
+          <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-gray-200/90 shadow-sm">
             {!formSubmitted ? (
               <form
                 className="space-y-4"
@@ -1085,31 +1347,6 @@ export default function RagSystemsPage() {
             )}
           </div>
 
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 14. PREVIOUS / NEXT SERVICE NAVIGATOR                            */}
-      {/* ================================================================= */}
-      <section className="py-10 bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium">
-            <Link
-              to="/services/process-automation"
-              className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors p-3 px-5 rounded-full bg-gray-100 border border-gray-200 w-full sm:w-auto justify-center"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>← PREV: Process Automation</span>
-            </Link>
-
-            <Link
-              to="/services/document-intelligence"
-              className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors p-3 px-5 rounded-full bg-gray-100 border border-gray-200 w-full sm:w-auto justify-center"
-            >
-              <span>NEXT: Document Intelligence →</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
         </div>
       </section>
 
