@@ -8,7 +8,12 @@ import {
   FileText,
   ShieldCheck,
   Workflow,
-  Lightbulb
+  Lightbulb,
+  Database,
+  ArrowDown,
+  ScanLine,
+  Quote,
+  RefreshCw
 } from 'lucide-react';
 
 export default function RagSystemsPage() {
@@ -801,60 +806,209 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 6. BUILT AROUND THE SYSTEMS AND DATA YOU ALREADY HAVE             */}
+      {/* 6. BUILT AROUND YOUR EXISTING SYSTEMS (2 + 1 ARCHITECTURE)        */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
+      {/* ================================================================= */}
+      {/* 6. BUILT AROUND YOUR EXISTING SYSTEMS (2 + 1 ARCHITECTURE)        */}
+      {/* ================================================================= */}
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="max-w-3xl mb-14">
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-              Built around the systems and data you already have.
+          {/* Section Header */}
+          <div className="max-w-3xl mb-8 sm:mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-3 sm:mb-4">
+              Built around your existing systems.
             </h2>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              You do not need to migrate or clean up everything first. Real company knowledge is messy, lives across several systems, and changes daily. We connect directly to where it is:
+              Your company knowledge lives across documents, databases and business tools. We connect it into one reliable solution — without rebuilding your infrastructure.
             </p>
           </div>
 
-          {/* 3 Pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 mb-12">
+          {/* 2 Data Sources Blocks */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
 
-            {/* Pillar 1: Documents */}
-            <div className="space-y-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">01 / Storage</div>
-              <h3 className="text-xl font-semibold text-gray-900">
-                Documents
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                PDFs, Word documents, Excel sheets, emails, SharePoint, Google Drive, and local network shared folders.
-              </p>
+            {/* Block 01 — Documents */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
+                    Documents
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  Make knowledge from your files and shared storage accessible and searchable.
+                </p>
+              </div>
+
+              {/* Supported Source Examples — 2 Logical Groups */}
+              <div className="pt-4 mt-6 border-t border-gray-200/70 space-y-2.5">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium">
+                  Supported sources
+                </div>
+                <div className="space-y-1.5 font-mono text-xs">
+                  {/* Group 1: Files */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {['PDF', 'Word', 'Excel', 'Email'].map((item) => (
+                      <span
+                        key={item}
+                        className="px-2.5 py-0.5 rounded-md bg-white border border-gray-200/80 text-gray-700 text-[11px]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Group 2: Storage */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {['SharePoint', 'Google Drive', 'Shared folders'].map((item) => (
+                      <span
+                        key={item}
+                        className="px-2.5 py-0.5 rounded-md bg-white border border-gray-200/80 text-gray-700 text-[11px]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Pillar 2: Business systems */}
-            <div className="space-y-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">02 / Live Data</div>
-              <h3 className="text-xl font-semibold text-gray-900">
-                Business systems
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                ERP systems, CRM platforms, SQL databases, ticketing queues, accounting tools, and internal business APIs.
-              </p>
-            </div>
+            {/* Block 02 — Business systems */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                    <Database className="w-4 h-4" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
+                    Business systems
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  Connect live data from the tools your business already uses.
+                </p>
+              </div>
 
-            {/* Pillar 3: Production requirements */}
-            <div className="space-y-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-gray-400">03 / Reliability</div>
-              <h3 className="text-xl font-semibold text-gray-900">
-                Production requirements
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                OCR for scanned files, role-based access permissions, source citation audits, and continuous automatic synchronization.
-              </p>
+              {/* Supported Source Examples — 2 Logical Groups */}
+              <div className="pt-4 mt-6 border-t border-gray-200/70 space-y-2.5">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium">
+                  Supported sources
+                </div>
+                <div className="space-y-1.5 font-mono text-xs">
+                  {/* Group 1: Systems */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {['ERP', 'CRM', 'SQL databases'].map((item) => (
+                      <span
+                        key={item}
+                        className="px-2.5 py-0.5 rounded-md bg-white border border-gray-200/80 text-gray-700 text-[11px]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Group 2: Services / APIs */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {['Ticketing', 'Internal APIs'].map((item) => (
+                      <span
+                        key={item}
+                        className="px-2.5 py-0.5 rounded-md bg-white border border-gray-200/80 text-gray-700 text-[11px]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
 
-          <div className="pt-6 border-t border-gray-100 text-sm text-gray-500">
-            Every answer is verified against your actual access rules — employees only see what their permissions allow.
+          {/* Clean Thin Downward Connecting Line with Arrow (Crisp Contrast) */}
+          <div className="py-2.5 sm:py-3 flex flex-col items-center justify-center" aria-hidden="true">
+            <div className="w-px h-7 bg-gray-400" />
+            <ArrowDown className="w-4 h-4 text-gray-700 -mt-1" />
+          </div>
+
+          {/* Full-Width Production Capabilities Layer */}
+          <div className="p-6 sm:p-7 rounded-2xl bg-[#FBFBF9] border border-gray-200/80">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 mb-5">
+              <div>
+                <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-1">
+                  Technical Foundation
+                </div>
+                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight">
+                  Built for production
+                </h3>
+              </div>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
+                Secure access, reliable synchronization and traceable answers — designed for real business environments.
+              </p>
+            </div>
+
+            {/* 4 Capabilities - Clean Unboxed Items with Icons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-5 border-t border-gray-200/70">
+              {/* 1. OCR processing */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                  <ScanLine className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-gray-500 font-medium">01</div>
+                  <div className="text-sm font-semibold text-gray-900 tracking-tight">
+                    OCR processing
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Access controls */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-gray-500 font-medium">02</div>
+                  <div className="text-sm font-semibold text-gray-900 tracking-tight">
+                    Access controls
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Source citations */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                  <Quote className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-gray-500 font-medium">03</div>
+                  <div className="text-sm font-semibold text-gray-900 tracking-tight">
+                    Source citations
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Automatic synchronization */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                  <RefreshCw className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-gray-500 font-medium">04</div>
+                  <div className="text-sm font-semibold text-gray-900 tracking-tight">
+                    Automatic synchronization
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Security Statement directly below production capabilities — High Contrast */}
+          <div className="mt-4 flex items-start sm:items-center gap-2.5 text-xs sm:text-sm text-gray-700">
+            <ShieldCheck className="w-4 h-4 text-gray-800 shrink-0 mt-0.5 sm:mt-0" />
+            <p className="leading-relaxed">
+              Access permissions are respected throughout retrieval, so employees only see information they're authorized to access.
+            </p>
           </div>
 
         </div>
@@ -910,8 +1064,8 @@ export default function RagSystemsPage() {
                 <div
                   key={card.number}
                   className={`p-7 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all duration-200 ${card.isPrimary
-                      ? 'bg-white/95 backdrop-blur-sm border border-gray-900/20 shadow-sm hover:border-gray-900/40 hover:shadow-duna-hover'
-                      : 'bg-white/85 backdrop-blur-sm border border-gray-200/80 shadow-xs hover:border-gray-300 hover:bg-white/95 hover:shadow-duna'
+                    ? 'bg-white/95 backdrop-blur-sm border border-gray-900/20 shadow-sm hover:border-gray-900/40 hover:shadow-duna-hover'
+                    : 'bg-white/85 backdrop-blur-sm border border-gray-200/80 shadow-xs hover:border-gray-300 hover:bg-white/95 hover:shadow-duna'
                     }`}
                 >
                   {/* Top: Icon & Indicator */}
@@ -919,8 +1073,8 @@ export default function RagSystemsPage() {
                     <div className="flex items-center justify-between mb-6">
                       <div
                         className={`w-10 h-10 rounded-xl flex items-center justify-center ${card.isPrimary
-                            ? 'bg-gray-900 text-white shadow-xs'
-                            : 'bg-gray-100 text-gray-700 border border-gray-200/60'
+                          ? 'bg-gray-900 text-white shadow-xs'
+                          : 'bg-gray-100 text-gray-700 border border-gray-200/60'
                           }`}
                       >
                         <IconComponent className="w-5 h-5" />
