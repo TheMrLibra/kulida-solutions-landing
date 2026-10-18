@@ -779,7 +779,7 @@ export default function DocumentIntelligencePage() {
       {/* ================================================================= */}
       {/* 1. HERO SECTION                                                   */}
       {/* ================================================================= */}
-      <section className="relative pt-36 pb-24 md:pt-40 md:pb-28 lg:pt-44 lg:pb-36 overflow-hidden z-10 border-duna-border">
+      <section className="relative pt-36 pb-20 md:pt-40 md:pb-24 lg:pt-44 lg:pb-28 overflow-hidden z-10 border-duna-border">
         {/* Parallax Background Canvas Layer */}
         <div
           className="absolute inset-0 bg-doc-hero pointer-events-none"
@@ -830,151 +830,21 @@ export default function DocumentIntelligencePage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 2. THE PROBLEM & IDP SOLUTION — UNIFIED SIDE-BY-SIDE COMPARISON   */}
+      {/* 2. DOCUMENT AUTOMATION — CAPABILITIES & BUSINESS PROCESSES        */}
       {/* ================================================================= */}
-      <section
-        id="problem-solution"
-        className="py-16 sm:py-24 bg-white"
-      >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
-              Stop copying information that's already there.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl">
-              Your PDFs, scans, emails and forms already contain valuable data. Intelligent Document Processing (IDP) extracts, validates and delivers that information to your business systems — saving your team hours of repetitive work.
-            </p>
-          </div>
-
-          {/* Side-by-Side Comparison Panels */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
-
-            {/* Left Panel — Manual processing */}
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FBFBF9] border border-gray-200/80 shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium">
-                    THE MANUAL WAY
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-6">
-                  Hours of repetitive work.
-                </h3>
-
-                {/* Three Steps */}
-                <div className="space-y-3">
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/70 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-400 font-medium shrink-0">
-                      01
-                    </span>
-                    <span className="text-sm font-medium text-gray-800">
-                      Open documents and find the data
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/70 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-400 font-medium shrink-0">
-                      02
-                    </span>
-                    <span className="text-sm font-medium text-gray-800">
-                      Copy values into another system
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/70 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-400 font-medium shrink-0">
-                      03
-                    </span>
-                    <span className="text-sm font-medium text-gray-800">
-                      Check for errors and missing fields
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Outcome Statement */}
-              <div className="pt-5 mt-6 border-t border-gray-200/70 flex items-center gap-2.5 text-xs sm:text-sm text-gray-600">
-                <Clock className="w-4 h-4 text-gray-400 shrink-0" />
-                <span className="font-medium">Every document requires manual attention.</span>
-              </div>
-            </div>
-
-            {/* Right Panel — Intelligent Document Processing */}
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FBFBF9] border border-gray-900/20 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-gray-700 font-medium flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    WITH DOCUMENT INTELLIGENCE
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-6">
-                  Less processing. More time saved.
-                </h3>
-
-                {/* Three Steps */}
-                <div className="space-y-3">
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/80 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-900 font-semibold shrink-0">
-                      01
-                    </span>
-                    <span className="text-sm font-medium text-gray-900">
-                      Extract relevant fields automatically
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/80 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-900 font-semibold shrink-0">
-                      02
-                    </span>
-                    <span className="text-sm font-medium text-gray-900">
-                      Flag exceptions for human review
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-gray-200/80 flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-gray-900 font-semibold shrink-0">
-                      03
-                    </span>
-                    <span className="text-sm font-medium text-gray-900">
-                      Send validated data to your systems
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Outcome Statement */}
-              <div className="pt-5 mt-6 border-t border-gray-200/70 flex items-center gap-2.5 text-xs sm:text-sm text-gray-900">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-gray-900">Spend time reviewing exceptions, not processing every document.</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 4. WHAT CAN WE AUTOMATE? (4 REFINED CARDS)                        */}
-      {/* ================================================================= */}
-      <section id="what-can-we-automate" className="py-20 sm:py-28 bg-white">
+      <section id="document-automation" className="pt-14 pb-20 sm:pt-18 sm:pb-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">
-            <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-2">
-              Capabilities
+            <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-2.5 sm:mb-3">
+              DOCUMENT AUTOMATION
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4">
-              What can we automate?
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
+              Less manual work. More automated workflows.
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              Every company handles different documents. We build solutions around the information you need and what should happen to it next.
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl">
+              Every invoice, contract or form requires information to be found, checked and entered somewhere else. We automate these repetitive steps, turning documents into structured data ready for your business systems.
             </p>
           </div>
 
@@ -993,7 +863,7 @@ export default function DocumentIntelligencePage() {
                   Invoices & Purchase Orders
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Extract supplier details, invoice numbers, dates, taxes, totals, and individual line items. Match information against purchase orders and prepare validated data for your accounting or ERP system.
+                  Extract invoice data, verify line items and match purchase orders.
                 </p>
               </div>
 
@@ -1019,7 +889,7 @@ export default function DocumentIntelligencePage() {
                   Contracts & Agreements
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Identify key clauses, obligations, parties, important dates, renewal terms, and other information hidden across contracts and legal documents.
+                  Identify key clauses, obligations, deadlines and renewal terms.
                 </p>
               </div>
 
@@ -1045,7 +915,7 @@ export default function DocumentIntelligencePage() {
                   Forms & Applications
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Turn applications, questionnaires, onboarding forms, claims, and other structured or semi-structured documents into organized digital records.
+                  Turn completed forms and applications into structured digital records.
                 </p>
               </div>
 
@@ -1071,7 +941,7 @@ export default function DocumentIntelligencePage() {
                   Business & Technical Documents
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Process delivery notes, shipping documents, certificates, technical specifications, reports, and industry-specific paperwork.
+                  Process delivery notes, certificates, reports and technical paperwork.
                 </p>
               </div>
 
