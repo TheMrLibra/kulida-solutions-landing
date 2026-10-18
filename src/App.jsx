@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ServicePage from './pages/ServicePage';
+import RagSystemsPage from './pages/RagSystemsPage';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <main className="relative z-10">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/services/rag-systems" element={<RagSystemsPage />} />
             <Route path="/services/:slug" element={<ServicePage />} />
           </Routes>
         </main>
