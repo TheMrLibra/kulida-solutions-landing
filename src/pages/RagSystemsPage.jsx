@@ -350,14 +350,6 @@ export default function RagSystemsPage() {
             willChange: 'transform, opacity'
           }}
         >
-          {/* Breadcrumbs — Top Left */}
-          <div className="flex items-center gap-2 text-xs text-duna-muted mb-8 md:mb-12 font-medium">
-            <Link to="/" className="hover:text-duna-dark transition-colors">[ HOME ]</Link>
-            <span>/</span>
-            <Link to="/" className="hover:text-duna-dark transition-colors">[ SERVICES ]</Link>
-            <span>/</span>
-            <span className="text-duna-dark font-semibold">[ RAG & AI AGENTS ]</span>
-          </div>
 
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
 
