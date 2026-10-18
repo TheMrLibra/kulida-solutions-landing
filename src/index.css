@@ -108,6 +108,27 @@ button,
   background-repeat: no-repeat;
 }
 
+.bg-zima-zima {
+  background-image: url('/images/zima-zima.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-warm-plains {
+  background-image: url('/images/warm-plains.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-cold-plains {
+  background-image: url('/images/cold-plains.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 .bg-cta-clouds {
   background-image: var(--cta-clouds-bg-url);
   background-size: cover;

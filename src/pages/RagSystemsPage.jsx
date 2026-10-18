@@ -18,6 +18,15 @@ export default function RagSystemsPage() {
   const workflowRef = useRef(null);
   const [isWorkflowVisible, setIsWorkflowVisible] = useState(false);
 
+  const problemSectionRef = useRef(null);
+  const [problemProgress, setProblemProgress] = useState(0);
+
+  const demoSectionRef = useRef(null);
+  const [demoProgress, setDemoProgress] = useState(0);
+
+  const chatbotSectionRef = useRef(null);
+  const [chatbotProgress, setChatbotProgress] = useState(0);
+
   const contactSectionRef = useRef(null);
   const contactBgRef = useRef(null);
   const contactFgRef = useRef(null);
@@ -52,6 +61,30 @@ export default function RagSystemsPage() {
         window.requestAnimationFrame(() => {
           setScrollY(window.scrollY);
 
+          // Parallax for Human Problem section
+          if (problemSectionRef.current) {
+            const rect = problemSectionRef.current.getBoundingClientRect();
+            const vh = window.innerHeight || 1;
+            const p = Math.min(1, Math.max(0, (vh - rect.top) / vh));
+            setProblemProgress(p);
+          }
+
+          // Parallax for demo scenarios section matching Section 4
+          if (demoSectionRef.current) {
+            const rect = demoSectionRef.current.getBoundingClientRect();
+            const vh = window.innerHeight || 1;
+            const p = Math.min(1, Math.max(0, (vh - rect.top) / vh));
+            setDemoProgress(p);
+          }
+
+          // Parallax for Chatbot / Complexity Continuum section
+          if (chatbotSectionRef.current) {
+            const rect = chatbotSectionRef.current.getBoundingClientRect();
+            const vh = window.innerHeight || 1;
+            const p = Math.min(1, Math.max(0, (vh - rect.top) / vh));
+            setChatbotProgress(p);
+          }
+
           // Parallax for contact section matching ContactSection.jsx
           if (contactSectionRef.current) {
             const rect = contactSectionRef.current.getBoundingClientRect();
@@ -76,9 +109,25 @@ export default function RagSystemsPage() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
+
+  // Parallax and mist calculations for Human Problem section
+  const problemMistOpacity = Math.pow(problemProgress, 1.15) * 0.94;
+  const problemParallaxY = -problemProgress * 46;
+
+  // Parallax and mist calculations for interactive demo scenarios section
+  const demoMistOpacity = Math.pow(demoProgress, 1.15) * 0.94;
+  const demoParallaxY = -demoProgress * 46;
+
+  // Parallax and mist calculations for Chatbot / Complexity Continuum section
+  const chatbotMistOpacity = Math.pow(chatbotProgress, 1.15) * 0.94;
+  const chatbotParallaxY = -chatbotProgress * 46;
 
   // Real business demonstration scenarios (Section 4)
   const demoScenarios = [
@@ -290,7 +339,7 @@ export default function RagSystemsPage() {
             <span>/</span>
             <Link to="/" className="hover:text-duna-dark transition-colors">[ SERVICES ]</Link>
             <span>/</span>
-            <span className="text-duna-dark font-semibold">[ 03 RAG & AI AGENTS ]</span>
+            <span className="text-duna-dark font-semibold">[ RAG & AI AGENTS ]</span>
           </div>
 
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
@@ -319,7 +368,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 2. CORE CAPABILITY BRIDGE SECTION                                 */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-baseline">
             <div className="lg:col-span-8">
@@ -340,8 +389,34 @@ export default function RagSystemsPage() {
       {/* 3. THE HUMAN PROBLEM — "YOU PROBABLY KNOW THIS SITUATION"         */}
       {/* (Clean editorial text on the left, simple converging source funnel on the right — NO BOXES!) */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        ref={problemSectionRef}
+        id="human-problem"
+        style={{ marginTop: '-1px' }}
+        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
+      >
+        {/* Parallax Background Layer with warm-plains.png */}
+        <div
+          className="absolute -inset-y-20 inset-x-0 bg-warm-plains pointer-events-none"
+          style={{
+            transform: `translate3d(0, ${problemParallaxY}px, 0)`,
+            willChange: 'transform'
+          }}
+        />
+
+        {/* Semi-transparent white overlay for enhanced text readability */}
+        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+
+        {/* Dispersion gradient: image at the top → white toward the content */}
+        <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
+
+        {/* Scroll-driven mist: thickens as the slide fully enters */}
+        <div
+          className="absolute inset-0 value-mist-gradient pointer-events-none"
+          style={{ opacity: problemMistOpacity }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -377,7 +452,7 @@ export default function RagSystemsPage() {
 
             {/* Right: Clean, Understated Funnel Graphic */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm p-6 sm:p-8 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-4">
+              <div className="w-full max-w-sm p-6 sm:p-8 bg-white/95 backdrop-blur-xs rounded-3xl border border-gray-200 shadow-sm space-y-4">
 
                 <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 pb-2 border-b border-gray-100">
                   FRAGMENTED SOURCES
@@ -425,7 +500,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 3. SO WHAT IS RAG? (NATURAL, SIMPLE EXPLANATION)                  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
@@ -450,7 +525,7 @@ export default function RagSystemsPage() {
             </p>
           </div>
 
-          <div className="py-4 text-xs sm:text-sm font-mono text-gray-600 bg-white p-4 rounded-xl border border-gray-200/80">
+          <div className="py-4 text-xs sm:text-sm font-mono text-gray-600 bg-gray-50 p-4 rounded-xl border border-gray-200/80">
             <strong>Question</strong> → Find the right information → <strong>Answer</strong> → Source citation
           </div>
 
@@ -464,8 +539,34 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 4. WHAT COULD THIS LOOK LIKE IN YOUR COMPANY? (INTERACTIVE DEMO)  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        ref={demoSectionRef}
+        id="demo-scenarios"
+        style={{ marginTop: '-1px' }}
+        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
+      >
+        {/* Parallax Background Layer with zima-zima.png */}
+        <div
+          className="absolute -inset-y-20 inset-x-0 bg-zima-zima pointer-events-none"
+          style={{
+            transform: `translate3d(0, ${demoParallaxY}px, 0)`,
+            willChange: 'transform'
+          }}
+        />
+
+        {/* Semi-transparent white overlay for enhanced text readability */}
+        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+
+        {/* Dispersion gradient: image at the top → white toward the content */}
+        <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
+
+        {/* Scroll-driven mist: thickens as the slide fully enters */}
+        <div
+          className="absolute inset-0 value-mist-gradient pointer-events-none"
+          style={{ opacity: demoMistOpacity }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Desktop Two-column / Mobile responsive layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -490,9 +591,9 @@ export default function RagSystemsPage() {
                       key={scenario.id}
                       type="button"
                       onClick={() => setActiveScenarioIndex(index)}
-                      className={`shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${isActive
-                          ? 'bg-gray-900 text-white shadow-xs'
-                          : 'bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200/70'
+                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all border-0 outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${isActive
+                        ? 'bg-gray-900 text-white shadow-xs'
+                        : 'bg-white/80 text-gray-600 hover:text-gray-900 hover:bg-white'
                         }`}
                     >
                       {scenario.title}
@@ -511,9 +612,9 @@ export default function RagSystemsPage() {
                       type="button"
                       onClick={() => setActiveScenarioIndex(index)}
                       aria-selected={isActive}
-                      className={`group w-full text-left px-4 py-3.5 rounded-xl border transition-all text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 ${isActive
-                          ? 'bg-[#FBFBF9] border-gray-300 text-gray-900 shadow-xs'
-                          : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      className={`group w-full text-left px-5 py-3.5 rounded-full transition-all text-sm border-0 outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${isActive
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'bg-white/40 text-gray-600 hover:text-gray-900 hover:bg-white/70'
                         }`}
                     >
                       <div className="flex items-center justify-between">
@@ -525,9 +626,6 @@ export default function RagSystemsPage() {
                             {scenario.title}
                           </span>
                         </div>
-                        {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-gray-900"></span>
-                        )}
                       </div>
                     </button>
                   );
@@ -537,16 +635,7 @@ export default function RagSystemsPage() {
 
             {/* Right Column: AI Workspace Preview */}
             <div className="lg:col-span-7">
-              <div className="bg-[#FBFBF9] border border-gray-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs min-h-[460px]">
-
-                {/* Workspace Header / Meta bar */}
-                <div className="flex items-center justify-between pb-4 border-b border-gray-200/80 mb-6 text-xs font-mono uppercase tracking-wider text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span className="text-gray-700 font-medium">Internal Knowledge Workspace</span>
-                  </div>
-                  <span>Scenario 0{activeScenarioIndex + 1} / 05</span>
-                </div>
+              <div className="bg-white/95 backdrop-blur-xs border border-gray-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs min-h-[460px]">
 
                 {/* Main Content with subtle transition */}
                 <div key={currentScenario.id} className="space-y-6 flex-1 transition-opacity duration-150">
@@ -593,8 +682,8 @@ export default function RagSystemsPage() {
                           <div
                             key={idx}
                             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono transition-colors ${isLive
-                                ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950 font-medium'
-                                : 'bg-white border-gray-200/90 text-gray-700'
+                              ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950 font-medium'
+                              : 'bg-white border-gray-200/90 text-gray-700'
                               }`}
                           >
                             {isLive ? (
@@ -702,7 +791,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 6. BUILT AROUND THE SYSTEMS AND DATA YOU ALREADY HAVE             */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="max-w-3xl mb-14">
@@ -762,8 +851,34 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 7. WE ARE NOT SELLING YOU A CHATBOT (CONTINUUM OF COMPLEXITY)    */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        ref={chatbotSectionRef}
+        id="complexity-continuum"
+        style={{ marginTop: '-1px' }}
+        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
+      >
+        {/* Parallax Background Layer with cold-plains.png */}
+        <div
+          className="absolute -inset-y-20 inset-x-0 bg-cold-plains pointer-events-none"
+          style={{
+            transform: `translate3d(0, ${chatbotParallaxY}px, 0)`,
+            willChange: 'transform'
+          }}
+        />
+
+        {/* Semi-transparent white overlay for enhanced text readability */}
+        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+
+        {/* Dispersion gradient: image at the top → white toward the content */}
+        <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
+
+        {/* Scroll-driven mist: thickens as the slide fully enters */}
+        <div
+          className="absolute inset-0 value-mist-gradient pointer-events-none"
+          style={{ opacity: chatbotMistOpacity }}
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">
@@ -915,7 +1030,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 8. RUN IT WHERE IT MAKES SENSE (3 ELEVATED DEPLOYMENT CARDS)       */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/70">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="max-w-3xl mb-12 sm:mb-16">
@@ -1023,90 +1138,12 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 9. THE PILOT — HIGH-IMPACT DARK CONVERSION CENTERPIECE             */}
-      {/* ================================================================= */}
-      <section className="py-24 sm:py-32 bg-[#0D0D0C] text-white relative z-10 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-mono uppercase tracking-widest text-gray-400 block mb-4">
-              LOW-RISK VALIDATION
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight mb-4">
-              Start with a small, measurable pilot.
-            </h2>
-            <p className="text-xl sm:text-2xl text-gray-300 font-normal leading-relaxed">
-              Your data. Your questions. A working prototype.
-            </p>
-          </div>
-
-          {/* Evidence Deliverables Grid */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#161614] border border-white/10 mb-10">
-            <div className="text-sm font-mono text-gray-400 uppercase tracking-wider mb-6">
-              What the pilot delivers:
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-              <div className="space-y-2">
-                <div className="text-2xl font-semibold text-white font-mono">20–30</div>
-                <div className="text-sm font-medium text-gray-200">Real questions</div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Collected directly from your team's everyday work.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="text-2xl font-semibold text-white font-mono">Quality</div>
-                <div className="text-sm font-medium text-gray-200">→ Measured answers</div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Exact accuracy rates and failure analysis on hard edge cases.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="text-2xl font-semibold text-white font-mono">Audit</div>
-                <div className="text-sm font-medium text-gray-200">→ Source verification</div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Direct citations tracing each fact back to the original document.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="text-2xl font-semibold text-white font-mono">Roadmap</div>
-                <div className="text-sm font-medium text-gray-200">→ Architecture spec</div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Concrete blueprint, hosting costs, and production scope.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Reassurance and CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-4 border-t border-white/10">
-            <p className="text-base sm:text-lg text-gray-300 font-medium">
-              No large commitment before you know it works.
-            </p>
-            <a
-              href="#contact"
-              className="bg-white hover:bg-gray-100 text-[#0D0D0C] text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 transition-all shadow-md shrink-0"
-            >
-              <span>Discuss a pilot on your data</span>
-              <ArrowRight className="w-4 h-4 text-gray-600" />
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
       {/* 10. HOW THE PROJECT WORKS (STREAMLINED LINEAR PROGRESSION)        */}
       {/* ================================================================= */}
       <section
         ref={workflowRef}
         id="workflow"
-        className="py-20 sm:py-28 bg-white border-b border-gray-200/70 relative z-10 overflow-hidden"
+        className="py-20 sm:py-28 bg-white relative z-10 overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -1171,7 +1208,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 12. FREQUENTLY ASKED QUESTIONS (CLEAN ACCORDION)                  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
+      <section className="py-20 sm:py-28 bg-[#FBFBF9]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-10">
