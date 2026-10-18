@@ -5,7 +5,10 @@ import {
   ArrowLeft,
   ChevronDown,
   Check,
-  FileText
+  FileText,
+  ShieldCheck,
+  Workflow,
+  Lightbulb
 } from 'lucide-react';
 
 export default function RagSystemsPage() {
@@ -273,37 +276,33 @@ export default function RagSystemsPage() {
     }
   ];
 
-  const aiComplexityLevels = [
+  const ragSolutions = [
     {
       number: "01",
       title: "Simple assistant",
-      inputs: ["Documents"],
-      output: "Answer",
-      desc: "Search and answer over a defined set of documents."
+      description: "Get accurate answers from a defined collection of documents.",
+      capabilities: "Documents → Answers",
+      icon: FileText,
+      isPrimary: false
     },
     {
       number: "02",
-      title: "Production retrieval",
-      inputs: ["Documents", "OCR", "Permissions", "Sync"],
-      output: "Answer with sources",
-      desc: "Built for real document estates, access rules and continuously changing content."
+      title: "Production RAG",
+      badge: "Core offering",
+      description: "Secure, up-to-date answers across your company's knowledge, with source citations and access control.",
+      capabilities: "OCR · Permissions · Sync · Citations",
+      icon: ShieldCheck,
+      isPrimary: true
     },
     {
       number: "03",
-      title: "Cross-system automation",
-      inputs: ["Documents", "ERP", "APIs", "Tools"],
-      output: "Answer / Action",
-      desc: "Combine knowledge with live business data and actions across systems."
+      title: "AI workflows",
+      description: "Connect your knowledge with live business systems to automate processes and turn answers into actions.",
+      capabilities: "ERP · APIs · Integrations · Actions",
+      icon: Workflow,
+      isPrimary: false
     }
   ];
-
-  const alternativeLevel = {
-    number: "04",
-    title: "Sometimes not AI",
-    inputs: ["Database", "Search", "Script"],
-    output: "Simpler solution",
-    desc: "If conventional software is faster, cheaper and more predictable, we use that instead."
-  };
 
   return (
     <div className="pb-16 bg-[#ffffff] text-gray-900 selection:bg-gray-900 selection:text-white">
@@ -878,7 +877,7 @@ export default function RagSystemsPage() {
           style={{ opacity: chatbotMistOpacity }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">
@@ -886,142 +885,95 @@ export default function RagSystemsPage() {
               We are not selling you a chatbot.
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-              Some problems only need a simple assistant.<br className="hidden sm:inline" />{' '}
-              Others need OCR, permissions, live data and workflow logic.
+              From simple document assistants to fully integrated AI workflows. We build the right solution for your data, systems and business needs.
             </p>
           </div>
 
-          {/* 2-Column Asymmetric Content Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-16 sm:mb-20">
-
-            {/* Left Column: Visual Anchor & Trimmed Focus */}
-            <div className="lg:col-span-5 space-y-8">
-              <div className="space-y-4">
-                <p className="text-xl sm:text-2xl font-medium tracking-tight text-gray-900 leading-snug">
-                  A generic chatbot is easy to build.
-                </p>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                  A production system has to fit your data, permissions, infrastructure and workflows.
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-gray-200/80">
-                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-duna-dark leading-tight">
-                  We use AI where it adds value — and simpler technology where it doesn't.
-                </h3>
-              </div>
-            </div>
-
-            {/* Right Column: Progressive Continuum of Complexity */}
-            <div className="lg:col-span-7">
-              {/* Top Label for 01-03 */}
-              <div className="text-xs font-mono uppercase tracking-wider text-gray-500 mb-8 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-                <span>From simple retrieval to full workflow integration</span>
-              </div>
-
-              {/* Steps 01 to 03 with connecting vertical line */}
-              <div className="relative space-y-8 sm:space-y-10">
-                {/* Thin Vertical Continuum Line */}
-                <div className="absolute left-[5px] top-2 bottom-3 w-[1px] bg-gray-200 pointer-events-none" />
-
-                {aiComplexityLevels.map((level, idx) => (
-                  <div key={idx} className="relative pl-8 sm:pl-10">
-                    {/* Node marker on the line */}
-                    <span className="absolute left-[1px] top-1.5 w-2.5 h-2.5 rounded-full bg-gray-900 ring-4 ring-white" />
-
-                    {/* Step Number & Title */}
-                    <div className="flex items-baseline gap-2.5 mb-1">
-                      <span className="font-mono text-xs font-medium text-gray-400">
-                        {level.number}
-                      </span>
-                      <h4 className="text-lg font-semibold text-gray-900 tracking-tight">
-                        {level.title}
-                      </h4>
+          {/* Three Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            {ragSolutions.map((card) => {
+              const IconComponent = card.icon;
+              return (
+                <div
+                  key={card.number}
+                  className={`p-7 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all duration-200 ${
+                    card.isPrimary
+                      ? 'bg-white/95 backdrop-blur-sm border border-gray-900/20 shadow-sm hover:border-gray-900/40 hover:shadow-duna-hover'
+                      : 'bg-white/85 backdrop-blur-sm border border-gray-200/80 shadow-xs hover:border-gray-300 hover:bg-white/95 hover:shadow-duna'
+                  }`}
+                >
+                  {/* Top: Icon & Indicator */}
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                          card.isPrimary
+                            ? 'bg-gray-900 text-white shadow-xs'
+                            : 'bg-gray-100 text-gray-700 border border-gray-200/60'
+                        }`}
+                      >
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      {card.badge ? (
+                        <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-gray-900 text-white font-medium">
+                          {card.badge}
+                        </span>
+                      ) : (
+                        <span className="font-mono text-xs font-medium text-gray-400">
+                          {card.number}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Complexity Formula Tags */}
-                    <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-gray-700 my-2">
-                      {level.inputs.map((inp, i) => (
-                        <React.Fragment key={i}>
-                          <span className="px-2 py-0.5 rounded bg-gray-100/90 border border-gray-200/60 text-gray-800 font-medium">
-                            {inp}
-                          </span>
-                          {i < level.inputs.length - 1 && (
-                            <span className="text-gray-400 font-sans text-xs">+</span>
-                          )}
-                        </React.Fragment>
-                      ))}
-                      <span className="text-gray-400 font-sans text-xs mx-0.5">→</span>
-                      <span className="px-2 py-0.5 rounded font-medium bg-[#1c1917] text-white">
-                        {level.output}
-                      </span>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-500 leading-relaxed">
-                      {level.desc}
+                    {/* Title & Description */}
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-3">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {card.description}
                     </p>
                   </div>
-                ))}
-              </div>
 
-              {/* Alternative Branch: Step 04 */}
-              <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-gray-100">
-                {/* Branch Label */}
-                <div className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-6 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-                  <span>Or take a different route</span>
-                </div>
-
-                <div className="relative pl-8 sm:pl-10">
-                  {/* Distinct Node Symbol: open geometric square node */}
-                  <span className="absolute left-[1px] top-1.5 w-2.5 h-2.5 rounded-sm border-2 border-gray-900 bg-white ring-4 ring-white" />
-
-                  {/* Step Number & Title */}
-                  <div className="flex items-baseline gap-2.5 mb-1">
-                    <span className="font-mono text-xs font-medium text-gray-400">
-                      {alternativeLevel.number}
-                    </span>
-                    <h4 className="text-lg font-semibold text-gray-900 tracking-tight">
-                      {alternativeLevel.title}
-                    </h4>
+                  {/* Bottom: Capabilities Row */}
+                  <div className="pt-5 mt-6 border-t border-gray-200/60">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
+                      Capabilities
+                    </div>
+                    <div className="text-xs font-mono text-gray-700 font-medium tracking-tight">
+                      {card.capabilities}
+                    </div>
                   </div>
-
-                  {/* Complexity Formula Tags */}
-                  <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-gray-700 my-2">
-                    {alternativeLevel.inputs.map((inp, i, arr) => (
-                      <React.Fragment key={i}>
-                        <span className="px-2 py-0.5 rounded bg-gray-100/90 border border-gray-200/60 text-gray-800 font-medium">
-                          {inp}
-                        </span>
-                        {i < arr.length - 1 && (
-                          <span className="text-gray-400 font-sans text-xs">/</span>
-                        )}
-                      </React.Fragment>
-                    ))}
-                    <span className="text-gray-400 font-sans text-xs mx-0.5">→</span>
-                    <span className="px-2 py-0.5 rounded font-medium bg-gray-800 text-white">
-                      {alternativeLevel.output}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {alternativeLevel.desc}
-                  </p>
                 </div>
-              </div>
-
-            </div>
-
+              );
+            })}
           </div>
 
-          {/* Final Punchline across full width */}
-          <div className="pt-10 sm:pt-12 border-t border-gray-200/70">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-gray-900 max-w-4xl leading-snug">
-              We start with the problem and build only the complexity that is actually useful.
-            </p>
+          {/* Understated Pragmatic Block: "Sometimes not AI" */}
+          <div className="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/70 backdrop-blur-sm border border-gray-200/70 hover:bg-white/85 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 border border-gray-200/60 flex items-center justify-center shrink-0">
+                <Lightbulb className="w-5 h-5 text-gray-700" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight">
+                  Sometimes, the best solution isn't AI.
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed mt-0.5">
+                  If conventional software is faster, cheaper and more predictable, we'll recommend that instead.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Subtle Call To Action */}
+          <div className="mt-10 sm:mt-12 flex justify-center">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[10rem] bg-duna-dark hover:bg-black text-white text-sm font-medium shadow-duna hover:shadow-duna-hover transition-all duration-200 group"
+            >
+              <span>Discuss your use case</span>
+              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
 
         </div>
