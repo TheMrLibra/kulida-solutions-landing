@@ -515,40 +515,147 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 3. SO WHAT IS RAG? (NATURAL, SIMPLE EXPLANATION)                  */}
+      {/* 3. SO WHAT IS RAG? (UNIFIED DOCUMENT & LIVE SYSTEMS EXPLANATION)  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section id="what-is-rag" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
-            So what is RAG?
-          </h2>
-
-          <p className="text-lg text-gray-700 leading-relaxed">
-            RAG stands for <strong>Retrieval-Augmented Generation</strong>. The name is more complicated than the idea.
-          </p>
-
-          <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
-            A normal AI model does not automatically know what is inside your contracts, manuals or internal systems. A RAG system gives it access to the information it needs when a question is asked.
-          </p>
-
-          <div className="py-4 my-2 pl-6 border-l-2 border-gray-300 space-y-3">
-            <p className="text-sm font-mono uppercase tracking-wider text-gray-400">Example:</p>
-            <p className="text-lg sm:text-xl font-medium text-gray-900">
-              “What did we agree with this customer about delivery deadlines?”
-            </p>
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              The system finds the relevant contract, amendment or email, gives that information to the AI and produces an answer. And because the answer is based on your documents, it can show you where it came from.
+          {/* Section Header */}
+          <div className="max-w-3xl mb-8 sm:mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-3 sm:mb-4">
+              So what is RAG?
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+              RAG (Retrieval-Augmented Generation) lets AI find and use relevant information from your company before answering a question. Sometimes that information lives in documents. Sometimes it requires live business data.
             </p>
           </div>
 
-          <div className="py-4 text-xs sm:text-sm font-mono text-gray-600 bg-gray-50 p-4 rounded-xl border border-gray-200/80">
-            <strong>Question</strong> → Find the right information → <strong>Answer</strong> → Source citation
+          {/* Two-Column Comparison Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+
+            {/* Card 01 — Document RAG */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium">
+                    01 / DOCUMENT RAG
+                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-semibold text-gray-900 tracking-tight mb-4">
+                  Find the right information.
+                </h3>
+
+                {/* Example Question Box */}
+                <div className="p-4 rounded-xl bg-white border border-gray-200/80 flex-1 flex flex-col justify-center min-h-[84px]">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1 font-medium">
+                    Example question
+                  </div>
+                  <p className="text-base font-medium text-gray-900 leading-snug">
+                    “What delivery deadline did we agree on?”
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom: Visual Flow & Description */}
+              <div className="pt-5 mt-6 border-t border-gray-200/70 space-y-3">
+                <div>
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium mb-2">
+                    How it works
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+                    <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80 text-gray-700 font-medium">
+                      Contracts
+                    </span>
+                    <span className="text-gray-400 font-sans">+</span>
+                    <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80 text-gray-700 font-medium">
+                      Emails
+                    </span>
+                    <span className="text-gray-400 font-sans mx-0.5">→</span>
+                    <span className="px-2.5 py-1 rounded-md bg-gray-900 text-white font-medium shadow-xs">
+                      Answer + Sources
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-600 leading-relaxed min-h-[40px] flex items-center">
+                  Finds the relevant documents and generates an answer backed by source citations.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 02 — Advanced RAG */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium">
+                    02 / RAG + LIVE SYSTEMS
+                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-200/80 flex items-center justify-center text-gray-800 shadow-xs shrink-0">
+                    <Workflow className="w-4 h-4" />
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-semibold text-gray-900 tracking-tight mb-4">
+                  Connect the dots across systems.
+                </h3>
+
+                {/* Example Question Box */}
+                <div className="p-4 rounded-xl bg-white border border-gray-200/80 flex-1 flex flex-col justify-center min-h-[84px]">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1 font-medium">
+                    Example question
+                  </div>
+                  <p className="text-base font-medium text-gray-900 leading-snug">
+                    “Which customers have unpaid invoices and contracts renewing soon?”
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom: Visual Flow & Description */}
+              <div className="pt-5 mt-6 border-t border-gray-200/70 space-y-3">
+                <div>
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-medium mb-2">
+                    How it works
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+                    <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80 text-gray-700 font-medium">
+                      Contracts
+                    </span>
+                    <span className="text-gray-400 font-sans">+</span>
+                    <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80 text-gray-700 font-medium">
+                      ERP
+                    </span>
+                    <span className="text-gray-400 font-sans">+</span>
+                    <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80 text-gray-700 font-medium">
+                      Dates
+                    </span>
+                    <span className="text-gray-400 font-sans mx-0.5">→</span>
+                    <span className="px-2.5 py-1 rounded-md bg-gray-900 text-white font-medium shadow-xs">
+                      Combined Answer
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-600 leading-relaxed min-h-[40px] flex items-center">
+                  Combines document knowledge with live business data to answer multi-step questions.
+                </p>
+              </div>
+            </div>
+
           </div>
 
-          <p className="text-gray-500 text-sm italic pt-2">
-            That is the basic idea. Sometimes that is all you need. Sometimes the system needs to do more.
-          </p>
+          {/* Shared Takeaway */}
+          <div className="mt-5 sm:mt-6 p-5 sm:p-6 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-6">
+            <p className="text-base font-semibold text-gray-900 tracking-tight shrink-0">
+              One principle. Different levels of complexity.
+            </p>
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
+              The goal stays the same: find the right information and turn it into useful, traceable answers. The architecture depends on the problem.
+            </p>
+          </div>
 
         </div>
       </section>
@@ -757,59 +864,7 @@ export default function RagSystemsPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 5. SOMETIMES THE ANSWER IS NOT IN A DOCUMENT (AGENTIC FLOW)       */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-gray-200/70">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
-            Sometimes the answer is not in a document.
-          </h2>
-
-          {/* Visual Example Card & Flow */}
-          <div className="p-6 sm:p-8 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-6">
-
-            <div>
-              <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Question:</p>
-              <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-snug">
-                “Which customers have unpaid invoices and contracts renewing in the next 60 days?”
-              </p>
-            </div>
-
-            {/* Flow */}
-            <div className="pt-4 border-t border-gray-100">
-              <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">System Flow:</p>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm text-gray-700">
-                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">Contracts</span>
-                <span className="text-gray-400 text-base font-sans">+</span>
-                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">ERP Invoices</span>
-                <span className="text-gray-400 text-base font-sans">+</span>
-                <span className="px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200/80 font-medium">Current Dates</span>
-                <span className="text-gray-400 text-base font-sans mx-1">→</span>
-                <span className="px-3 py-1.5 rounded-lg bg-gray-900 text-white font-medium">One verified answer</span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* 2 sentences about Agentic RAG */}
-          <div className="space-y-3 text-base sm:text-lg text-gray-600 leading-relaxed">
-            <p>
-              Part of the answer lives in customer contracts, but current invoice data lives in your ERP or accounting system.
-            </p>
-            <p>
-              This is <strong>Agentic RAG</strong>. The system doesn't just search files — it queries APIs, checks live data, and reasons across multiple systems before producing a verified answer.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 6. BUILT AROUND YOUR EXISTING SYSTEMS (2 + 1 ARCHITECTURE)        */}
-      {/* ================================================================= */}
-      {/* ================================================================= */}
-      {/* 6. BUILT AROUND YOUR EXISTING SYSTEMS (2 + 1 ARCHITECTURE)        */}
+      {/* 5. BUILT AROUND YOUR EXISTING SYSTEMS (2 + 1 ARCHITECTURE)        */}
       {/* ================================================================= */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
