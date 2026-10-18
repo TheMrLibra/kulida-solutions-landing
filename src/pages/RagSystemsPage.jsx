@@ -326,7 +326,7 @@ export default function RagSystemsPage() {
     <div className="pb-16 bg-[#ffffff] text-gray-900 selection:bg-gray-900 selection:text-white">
 
       {/* ================================================================= */}
-      {/* 1. HERO — HOMEPAGE PARALLAX STYLE WITH RAG_HERO.PNG               */}
+      {/* 1. HERO — HOMEPAGE PARALLAX STYLE WITH COLD-PLAINS.PNG            */}
       {/* ================================================================= */}
       <section className="relative pt-36 pb-24 md:pt-40 md:pb-28 lg:pt-44 lg:pb-36 overflow-hidden z-10 border-duna-border">
         {/* Parallax Background Painterly Canvas Layer */}

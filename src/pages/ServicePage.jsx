@@ -4,12 +4,17 @@ import { servicesData } from '../data/servicesData';
 import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import RagSystemsPage from './RagSystemsPage';
+import DocumentIntelligencePage from './DocumentIntelligencePage';
 
 export default function ServicePage() {
   const { slug } = useParams();
 
   if (slug === 'rag-systems') {
     return <RagSystemsPage />;
+  }
+
+  if (slug === 'document-intelligence') {
+    return <DocumentIntelligencePage />;
   }
 
   const service = servicesData.find((s) => s.slug === slug);

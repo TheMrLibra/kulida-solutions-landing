@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ServicePage from './pages/ServicePage';
 import RagSystemsPage from './pages/RagSystemsPage';
+import DocumentIntelligencePage from './pages/DocumentIntelligencePage';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services/rag-systems" element={<RagSystemsPage />} />
+            <Route path="/services/document-intelligence" element={<DocumentIntelligencePage />} />
             <Route path="/services/:slug" element={<ServicePage />} />
           </Routes>
         </main>
