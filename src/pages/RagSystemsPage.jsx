@@ -20,6 +20,7 @@ export default function RagSystemsPage() {
 
   const workflowRef = useRef(null);
   const [isWorkflowVisible, setIsWorkflowVisible] = useState(false);
+  const [workflowProgress, setWorkflowProgress] = useState(0);
 
   const problemSectionRef = useRef(null);
   const [problemProgress, setProblemProgress] = useState(0);
@@ -88,6 +89,14 @@ export default function RagSystemsPage() {
             setChatbotProgress(p);
           }
 
+          // Parallax for How the project works section
+          if (workflowRef.current) {
+            const rect = workflowRef.current.getBoundingClientRect();
+            const vh = window.innerHeight || 1;
+            const p = Math.min(1, Math.max(0, (vh - rect.top) / vh));
+            setWorkflowProgress(p);
+          }
+
           // Parallax for contact section matching ContactSection.jsx
           if (contactSectionRef.current) {
             const rect = contactSectionRef.current.getBoundingClientRect();
@@ -131,6 +140,10 @@ export default function RagSystemsPage() {
   // Parallax and mist calculations for Chatbot / Complexity Continuum section
   const chatbotMistOpacity = Math.pow(chatbotProgress, 1.15) * 0.94;
   const chatbotParallaxY = -chatbotProgress * 46;
+
+  // Parallax and mist calculations for How the project works section
+  const workflowMistOpacity = Math.pow(workflowProgress, 1.15) * 0.94;
+  const workflowParallaxY = -workflowProgress * 46;
 
   // Real business demonstration scenarios (Section 4)
   const demoScenarios = [
@@ -896,21 +909,19 @@ export default function RagSystemsPage() {
               return (
                 <div
                   key={card.number}
-                  className={`p-7 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all duration-200 ${
-                    card.isPrimary
+                  className={`p-7 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all duration-200 ${card.isPrimary
                       ? 'bg-white/95 backdrop-blur-sm border border-gray-900/20 shadow-sm hover:border-gray-900/40 hover:shadow-duna-hover'
                       : 'bg-white/85 backdrop-blur-sm border border-gray-200/80 shadow-xs hover:border-gray-300 hover:bg-white/95 hover:shadow-duna'
-                  }`}
+                    }`}
                 >
                   {/* Top: Icon & Indicator */}
                   <div>
                     <div className="flex items-center justify-between mb-6">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                          card.isPrimary
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center ${card.isPrimary
                             ? 'bg-gray-900 text-white shadow-xs'
                             : 'bg-gray-100 text-gray-700 border border-gray-200/60'
-                        }`}
+                          }`}
                       >
                         <IconComponent className="w-5 h-5" />
                       </div>
@@ -1095,9 +1106,31 @@ export default function RagSystemsPage() {
       <section
         ref={workflowRef}
         id="workflow"
-        className="py-20 sm:py-28 bg-white relative z-10 overflow-hidden"
+        style={{ marginTop: '-1px' }}
+        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Parallax Background Layer with cottage-winter.png */}
+        <div
+          className="absolute -inset-y-20 inset-x-0 bg-cottage-winter pointer-events-none"
+          style={{
+            transform: `translate3d(0, ${workflowParallaxY}px, 0)`,
+            willChange: 'transform'
+          }}
+        />
+
+        {/* Semi-transparent white overlay for enhanced text readability */}
+        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+
+        {/* Dispersion gradient: image at the top → white toward the content */}
+        <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
+
+        {/* Scroll-driven mist: thickens as the slide fully enters */}
+        <div
+          className="absolute inset-0 value-mist-gradient pointer-events-none"
+          style={{ opacity: workflowMistOpacity }}
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
           <div className="max-w-3xl mb-16 sm:mb-20">
@@ -1160,7 +1193,7 @@ export default function RagSystemsPage() {
       {/* ================================================================= */}
       {/* 12. FREQUENTLY ASKED QUESTIONS (CLEAN ACCORDION)                  */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9]">
+      <section className="py-20 sm:py-28">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-10">

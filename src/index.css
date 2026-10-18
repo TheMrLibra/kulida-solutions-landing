@@ -129,6 +129,13 @@ button,
   background-repeat: no-repeat;
 }
 
+.bg-cottage-winter {
+  background-image: url('/images/cottage-winter.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 .bg-cta-clouds {
   background-image: var(--cta-clouds-bg-url);
   background-size: cover;
