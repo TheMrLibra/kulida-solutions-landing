@@ -29,7 +29,10 @@ import {
   ClipboardCheck,
   Zap,
   Building2,
-  PhoneCall
+  PhoneCall,
+  Database,
+  BookOpen,
+  Receipt
 } from 'lucide-react';
 
 export default function FieldServiceAiPage() {
@@ -1017,255 +1020,190 @@ export default function FieldServiceAiPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* SECTION 5 — ADDITIONAL CAPABILITIES                               */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-4 leading-tight">
-              More than service reports,<br />
-              when you need it.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              Start with the core voice-to-report workflow. When your team is ready, add secondary capabilities that make field work even smoother.
-            </p>
-          </div>
-
-          {/* Three Restrained Capability Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-
-            {/* Card 1 — Answers from your manuals */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between hover:border-gray-300 transition-colors">
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-2xs">
-                  <Search className="w-5 h-5 text-gray-800" />
-                </div>
-
-                <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                  Answers from your manuals
-                </h3>
-
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  A technician can ask about an error code, a servicing procedure or an equipment model and get a relevant answer from the documents you provide, with a reference to the source. Equipment history can be included when available.
-                </p>
-              </div>
-
-              {/* Contextual UI Illustration */}
-              <div className="mt-6 pt-5 border-t border-gray-200/70 space-y-2.5">
-                <div className="p-3 rounded-xl bg-white border border-gray-200/80 text-xs space-y-1.5 shadow-2xs">
-                  <div className="text-[10px] font-mono text-gray-400">Technician query:</div>
-                  <div className="font-medium text-gray-800">“Error code E04 on Daikin Altherma 3”</div>
-                  <div className="pt-1.5 border-t border-gray-100 flex items-center justify-between text-[11px]">
-                    <span className="text-emerald-700 font-medium">Low pressure (&lt; 0.8 bar)</span>
-                    <span className="text-gray-400 font-mono text-[10px]">Manual p.48</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2 — Parts and job information */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between hover:border-gray-300 transition-colors">
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-2xs">
-                  <Package className="w-5 h-5 text-gray-800" />
-                </div>
-
-                <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                  Parts and job information
-                </h3>
-
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Check whether a part is available or see what happened on the last visit — when your stock and service records can be connected.
-                </p>
-              </div>
-
-              {/* Contextual UI Illustration */}
-              <div className="mt-6 pt-5 border-t border-gray-200/70 space-y-2.5">
-                <div className="p-3 rounded-xl bg-white border border-gray-200/80 text-xs space-y-1.5 shadow-2xs">
-                  <div className="flex justify-between items-center text-[10px] font-mono text-gray-400">
-                    <span>Part availability:</span>
-                    <span className="text-emerald-600 font-semibold">IN STOCK</span>
-                  </div>
-                  <div className="font-medium text-gray-800">Grundfos UPM3 circulator pump</div>
-                  <div className="pt-1.5 border-t border-gray-100 text-[10px] text-gray-500 font-mono">
-                    Van 2: 1 unit · Depot: 4 units
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 — Follow-ups that reach the office */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col justify-between hover:border-gray-300 transition-colors">
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-2xs">
-                  <CalendarCheck className="w-5 h-5 text-gray-800" />
-                </div>
-
-                <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                  Follow-ups that reach the office
-                </h3>
-
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  A customer mentions another repair or asks for a quotation? Record it during the visit and turn it into a clear task for the office.
-                </p>
-              </div>
-
-              {/* Contextual UI Illustration */}
-              <div className="mt-6 pt-5 border-t border-gray-200/70 space-y-2.5">
-                <div className="p-3 rounded-xl bg-white border border-gray-200/80 text-xs space-y-1.5 shadow-2xs">
-                  <div className="flex justify-between items-center text-[10px] font-mono text-amber-700 font-semibold">
-                    <span>OFFICE ACTION REQUIRED</span>
-                    <span className="text-gray-400">48h SLA</span>
-                  </div>
-                  <div className="font-medium text-gray-800">Quote repair: Outdoor cable replacement</div>
-                  <div className="pt-1.5 border-t border-gray-100 text-[10px] text-gray-500 font-mono">
-                    Tagged for office review with photo
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Closing Line */}
-          <div className="mt-12 text-center text-gray-600 text-base sm:text-lg font-medium">
-            Start with the part of the job that creates the most paperwork. The rest can come later.
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
       {/* SECTION 6 — FITS EXISTING SYSTEMS                                 */}
       {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FBFBF9] border-t border-b border-gray-200/80">
+      <section className="py-14 sm:py-20 border-b border-gray-200/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
-          <div className="max-w-3xl mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4 leading-tight">
+          <div className="max-w-3xl mb-8 sm:mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-3 leading-tight">
               Built around your paperwork.<br />
               Not the other way around.
             </h2>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              Your report template. Your terminology. Your products. Your existing workflow. We can work with the information and tools you already have.
+              Your reports, your records, your existing tools. We build the assistant to fit the way your company works.
             </p>
           </div>
 
-          {/* 3 Categories Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+          {/* Single Cohesive Integration Visualization */}
+          <div className="p-5 sm:p-7 lg:p-8 rounded-3xl bg-white border border-gray-200/90 shadow-2xs">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-4">
 
-            {/* Category 1 */}
-            <div className="p-6 rounded-3xl bg-white border border-gray-200/80 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-800 text-xs font-mono font-semibold">
-                01
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
-                Service forms and documents
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Report templates, inspection checklists, manuals, and PDFs.
-              </p>
-              <div className="pt-3 flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-600">
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Word / PDF forms</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Checklists</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Manuals</span>
-              </div>
-            </div>
+              {/* Left Part — Your existing information */}
+              <div className="w-full lg:w-[32%] space-y-3">
 
-            {/* Category 2 */}
-            <div className="p-6 rounded-3xl bg-white border border-gray-200/80 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-800 text-xs font-mono font-semibold">
-                02
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
-                Job and customer records
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Work orders, equipment history, and customer information.
-              </p>
-              <div className="pt-3 flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-600">
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Work orders</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Asset history</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Customer info</span>
-              </div>
-            </div>
-
-            {/* Category 3 */}
-            <div className="p-6 rounded-3xl bg-white border border-gray-200/80 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-800 text-xs font-mono font-semibold">
-                03
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
-                Office and billing tools
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Emailed PDFs, structured exports, or direct integrations where supported.
-              </p>
-              <div className="pt-3 flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-600">
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Emailed PDFs</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">CSV/Excel</span>
-                <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">Direct APIs</span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Horizontal Workflow Visualization */}
-          <div className="p-8 rounded-3xl bg-white border border-gray-200/90 shadow-2xs space-y-6">
-            <div className="text-xs font-mono uppercase tracking-wider text-gray-400 font-medium">
-              Primary Workflow Visualization
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-              {[
-                {
-                  step: "01",
-                  title: "Service visit",
-                  desc: "Technician describes work by voice on phone"
-                },
-                {
-                  step: "02",
-                  title: "Approved report",
-                  desc: "Technician checks details, adds photos & signs"
-                },
-                {
-                  step: "03",
-                  title: "Office queue",
-                  desc: "Clean PDF or data export arrives immediately"
-                },
-                {
-                  step: "04",
-                  title: "Invoicing",
-                  desc: "Labour & materials ready for billing without delay"
-                }
-              ].map((item, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80 space-y-1.5 relative">
-                  <div className="text-[10px] font-mono text-gray-400 font-semibold">{item.step}</div>
-                  <div className="font-semibold text-gray-900 text-sm">{item.title}</div>
-                  <div className="text-xs text-gray-600 leading-relaxed">{item.desc}</div>
+                {/* 1. Report templates */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/90 flex items-center justify-center text-gray-700 shadow-2xs shrink-0">
+                    <FileText className="w-4 h-4 text-gray-700" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Report templates
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Existing PDFs, forms & custom checklists
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            <div className="pt-4 border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
-              You don't need to replace your job-management software to get started. If there isn't a practical integration, a clear PDF delivered to the office can already be useful.
+                {/* 2. Job & customer records */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/90 flex items-center justify-center text-gray-700 shadow-2xs shrink-0">
+                    <Database className="w-4 h-4 text-gray-700" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Job & customer records
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Work orders & history (via supported access)
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Service manuals */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/90 flex items-center justify-center text-gray-700 shadow-2xs shrink-0">
+                    <BookOpen className="w-4 h-4 text-gray-700" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Service manuals
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Manufacturer documentation & spec sheets
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Connector 1: Left -> Center */}
+              <div className="hidden lg:flex items-center justify-center text-gray-300 shrink-0 w-8" aria-hidden="true">
+                <div className="w-full flex items-center justify-center">
+                  <div className="h-px bg-gray-300 w-full" />
+                  <ArrowRight className="w-4 h-4 text-gray-400 -ml-1 shrink-0" />
+                </div>
+              </div>
+              <div className="lg:hidden flex flex-col items-center justify-center text-gray-400 py-1" aria-hidden="true">
+                <div className="w-px h-5 bg-gray-300" />
+                <ArrowDown className="w-3.5 h-3.5 text-gray-400 -mt-0.5" />
+              </div>
+
+              {/* Center Part — Field AI Assistant */}
+              <div className="w-full lg:w-[28%] max-w-[280px] lg:max-w-none p-6 rounded-3xl bg-[#38332E] text-white shadow-md border border-gray-800 flex flex-col items-center text-center relative shrink-0">
+                {/* Subtle smartphone notch */}
+
+                <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center text-white mb-3 shadow-inner">
+                  <Smartphone className="w-5 h-5 text-white" />
+                </div>
+
+                <div className="font-semibold text-base sm:text-lg text-white tracking-tight mb-1">
+                  Field AI Assistant
+                </div>
+
+                <p className="text-xs text-gray-300 font-normal mb-3.5">
+                  Adapted to your workflow
+                </p>
+
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[11px] font-mono text-gray-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Voice · Review · Approve</span>
+                </div>
+
+              </div>
+
+              {/* Connector 2: Center -> Right */}
+              <div className="hidden lg:flex items-center justify-center text-gray-300 shrink-0 w-8" aria-hidden="true">
+                <div className="w-full flex items-center justify-center">
+                  <div className="h-px bg-gray-300 w-full" />
+                  <ArrowRight className="w-4 h-4 text-gray-400 -ml-1 shrink-0" />
+                </div>
+              </div>
+              <div className="lg:hidden flex flex-col items-center justify-center text-gray-400 py-1" aria-hidden="true">
+                <div className="w-px h-5 bg-gray-300" />
+                <ArrowDown className="w-3.5 h-3.5 text-gray-400 -mt-0.5" />
+              </div>
+
+              {/* Right Part — Office outputs */}
+              <div className="w-full lg:w-[32%] space-y-3">
+
+                {/* 1. Approved reports */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-700 shadow-2xs shrink-0">
+                    <FileCheck className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Approved reports
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Technician-verified summary (PDF / email)
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Labour & materials */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-700 shadow-2xs shrink-0">
+                    <Receipt className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Labour & materials
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Structured for billing & invoicing tools
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Follow-up tasks */}
+                <div className="p-3.5 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 flex items-center gap-3.5 hover:border-gray-300 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-700 shadow-2xs shrink-0">
+                    <CalendarCheck className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900 leading-snug">
+                      Follow-up tasks
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      Office action items & quotation requests
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+
+          {/* Closing Statement */}
+          <p className="mt-6 sm:mt-8 text-center text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+            No need to replace your existing software. Start with PDFs and email, then add integrations where they make sense.
+          </p>
 
         </div>
       </section>
 
       {/* ================================================================= */}
-      {/* SECTION 7 — TRUST AND USABILITY                                   */}
+      {/* SECTION 7 — TECHNICIAN EXPERIENCE (EDITORIAL 2-COLUMN)            */}
       {/* ================================================================= */}
       <section
         ref={trustSectionRef}
         id="trust"
         style={{ marginTop: '-1px' }}
-        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
+        className="relative z-10 overflow-hidden py-16 sm:py-24 bg-white"
       >
         {/* Parallax Background Layer with les-reka.png */}
         <div
@@ -1276,8 +1214,8 @@ export default function FieldServiceAiPage() {
           }}
         />
 
-        {/* Semi-transparent white overlay */}
-        <div className="absolute inset-0 bg-white/45 pointer-events-none" />
+        {/* Semi-transparent white overlay to ensure high text contrast while letting scenery breathe */}
+        <div className="absolute inset-0 bg-white/55 pointer-events-none" />
 
         {/* Dispersion gradient */}
         <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
@@ -1290,64 +1228,79 @@ export default function FieldServiceAiPage() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Section Header */}
-          <div className="max-w-3xl mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4 leading-tight">
-              Not another app your technicians have to feed.
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-              We design tools that technicians actually like using because they save time on site rather than creating extra hurdles.
-            </p>
+          {/* Spacious Two-Column Composition directly over scenic landscape */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+
+            {/* Left Column: Eyebrow + Large Headline + Short Paragraph */}
+            <div className="lg:col-span-6 max-w-xl">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-gray-600 font-semibold mb-3">
+                BUILT FOR TECHNICIANS
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4 sm:mb-5 leading-[1.14]">
+                Less paperwork.<br />
+                Not another task.
+              </h2>
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+                Designed to fit the way technicians already work, without adding another complicated process.
+              </p>
+            </div>
+
+            {/* Right Column: Three concise benefit rows with small icons and thin dividers */}
+            <div className="lg:col-span-6 divide-y divide-gray-200/80">
+
+              {/* Benefit 1 — Speak naturally */}
+              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 flex items-start gap-4 sm:gap-5">
+                <div className="w-9 h-9 rounded-xl bg-white/90 backdrop-blur-xs border border-gray-200/90 flex items-center justify-center text-gray-800 shadow-2xs shrink-0 mt-0.5">
+                  <Mic className="w-4 h-4 text-gray-800" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight mb-1">
+                    Speak naturally
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    Use the technical terms your team already knows.
+                  </p>
+                </div>
+              </div>
+
+              {/* Benefit 2 — Stay in control */}
+              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 flex items-start gap-4 sm:gap-5">
+                <div className="w-9 h-9 rounded-xl bg-white/90 backdrop-blur-xs border border-gray-200/90 flex items-center justify-center text-gray-800 shadow-2xs shrink-0 mt-0.5">
+                  <CheckCircle2 className="w-4 h-4 text-gray-800" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight mb-1">
+                    Stay in control
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    Review and approve every report before it's sent.
+                  </p>
+                </div>
+              </div>
+
+              {/* Benefit 3 — Use familiar devices */}
+              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 flex items-start gap-4 sm:gap-5">
+                <div className="w-9 h-9 rounded-xl bg-white/90 backdrop-blur-xs border border-gray-200/90 flex items-center justify-center text-gray-800 shadow-2xs shrink-0 mt-0.5">
+                  <Smartphone className="w-4 h-4 text-gray-800" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight mb-1">
+                    Use familiar devices
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    Built for the phones your technicians already carry.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
-          {/* Three Trust Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-
-            {/* Card 1 */}
-            <div className="p-7 rounded-3xl bg-white/95 backdrop-blur-sm border border-gray-200/90 shadow-sm space-y-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900">
-                <Mic className="w-5 h-5 text-gray-800" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                Speak instead of typing
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Built around short, natural job descriptions — including the product names and technical terms your team uses.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="p-7 rounded-3xl bg-white/95 backdrop-blur-sm border border-gray-200/90 shadow-sm space-y-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900">
-                <CheckCircle2 className="w-5 h-5 text-gray-800" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                The technician approves the report
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                The assistant prepares a draft. The person who did the work can correct it before anything is sent.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="p-7 rounded-3xl bg-white/95 backdrop-blur-sm border border-gray-200/90 shadow-sm space-y-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900">
-                <Smartphone className="w-5 h-5 text-gray-800" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-                Designed for real service visits
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Use the phones your team already has. Where required, we can design the capture flow to save notes without a signal and sync them later. Live document searches and AI processing need connectivity.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Closing Trust Statement */}
-          <div className="p-6 rounded-2xl bg-white/90 backdrop-blur-sm border border-gray-200 text-center max-w-2xl mx-auto shadow-2xs">
-            <p className="text-base font-medium text-gray-900">
-              The goal is to remove unnecessary paperwork, not to track where your technicians spend their day.
+          {/* Closing Reassurance: Visually secondary single line */}
+          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-300/60 flex items-center justify-center">
+            <p className="text-xs sm:text-sm text-gray-500 font-medium text-center">
+              Built to reduce paperwork, not monitor technicians.
             </p>
           </div>
 
@@ -1530,9 +1483,6 @@ export default function FieldServiceAiPage() {
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
               How much paperwork happens after the job is done?
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              Show us one of your current service reports and tell us what happens before it becomes an invoice. We'll discuss what a simpler process could look like for your team.
-            </p>
           </div>
 
           <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-gray-200/90 shadow-sm">
