@@ -82,7 +82,7 @@ export default function Navbar() {
                         className="block group px-4 py-2 -mx-4 rounded-full hover:bg-white/10 transition-all duration-200 animate-item-slide-up"
                         style={{ animationDelay: `${(index + 1) * 45 + 30}ms` }}
                       >
-                        <div className="text-base lg:text-lg font-medium text-white group-hover:text-blue-200 transition-colors">
+                        <div className="text-base lg:text-lg font-medium text-white group-hover:text-gray-300 transition-colors">
                           {service.title}
                         </div>
                       </Link>
@@ -105,7 +105,7 @@ export default function Navbar() {
                         className="block group px-4 py-2 -mx-4 rounded-full hover:bg-white/10 transition-all duration-200 animate-item-slide-up"
                         style={{ animationDelay: `${(index + 1) * 45 + 30}ms` }}
                       >
-                        <div className="text-base lg:text-lg font-medium text-white group-hover:text-blue-200 transition-colors">
+                        <div className="text-base lg:text-lg font-medium text-white group-hover:text-gray-300 transition-colors">
                           {service.title}
                         </div>
                       </Link>
