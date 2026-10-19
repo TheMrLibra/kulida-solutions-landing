@@ -1368,11 +1368,6 @@ export default function RagSystemsPage() {
                     style={{ transitionDelay: `${delay}ms` }}
                   />
 
-                  {/* Step Number */}
-                  <div className="font-mono text-xs text-gray-400 font-medium mb-3">
-                    {step.number}
-                  </div>
-
                   {/* Step Title */}
                   <h3 className="text-2xl font-medium tracking-tight text-gray-900 mb-3">
                     {step.title}

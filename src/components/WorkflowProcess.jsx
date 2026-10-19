@@ -78,8 +78,8 @@ export default function WorkflowProcess() {
               <div
                 key={idx}
                 className={`relative pt-6 lg:pt-8 text-left transition-all duration-700 transform ${isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-6'
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-6'
                   }`}
                 style={{ transitionDelay: `${delay}ms` }}
               >
@@ -89,11 +89,6 @@ export default function WorkflowProcess() {
                     }`}
                   style={{ transitionDelay: `${delay}ms` }}
                 />
-
-                {/* Step Number (01, 02, 03, 04) in Monospace */}
-                <div className="font-mono text-xs text-gray-400 font-medium mb-3">
-                  {step.number}
-                </div>
 
                 {/* Step Title (e.g. Analysis, Prototyping) */}
                 <h3 className="text-2xl font-medium tracking-tight text-gray-900 mb-3">
