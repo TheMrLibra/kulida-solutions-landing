@@ -844,11 +844,11 @@ export default function DocumentIntelligencePage() {
       {/* ================================================================= */}
       {/* 2. DOCUMENT AUTOMATION — CAPABILITIES & BUSINESS PROCESSES        */}
       {/* ================================================================= */}
-      <section id="document-automation" className="pt-14 pb-20 sm:pt-18 sm:pb-28 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="document-automation" className="pt-12 pb-16 sm:pt-16 sm:pb-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
-          <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="max-w-3xl mb-10 sm:mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
               Less manual work. More automated workflows.
             </h2>
@@ -857,132 +857,97 @@ export default function DocumentIntelligencePage() {
             </p>
           </div>
 
-          {/* 4 Clean Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+          {/* 4 Clean Cards Grid — Compact 4-Column Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
 
-            {/* Card 1: Invoices & Purchase Orders */}
-            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:shadow-duna transition-all duration-200">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs">
-                    <Receipt className="w-5 h-5" />
-                  </div>
+            {/* Card 1: Invoices & POs */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200">
+              <div className="flex flex-col flex-1">
+                <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
+                  <Receipt className="w-4.5 h-4.5 text-gray-800" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-3">
-                  Invoices & Purchase Orders
+                <h3 className="text-lg font-semibold text-gray-900 tracking-tight mb-2">
+                  Invoices &amp; POs
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Extract invoice data, verify line items and match purchase orders.
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Extract invoice data, match orders and prepare ERP records.
                 </p>
+                <div className="flex-1 min-h-[16px]" />
               </div>
 
-              <div className="pt-6 mt-6 border-t border-gray-200/70">
-                <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-600">
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Line items</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">3-way PO match</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">VAT check</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">ERP sync</span>
-                </div>
+              <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70">
+                <p className="text-xs text-gray-500 font-medium tracking-tight">
+                  Line items <span className="text-gray-300 mx-1.5 font-normal">·</span> VAT <span className="text-gray-300 mx-1.5 font-normal">·</span> ERP
+                </p>
               </div>
             </div>
 
-            {/* Card 2: Contracts & Agreements */}
-            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:shadow-duna transition-all duration-200">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs">
-                    <FileSignature className="w-5 h-5" />
-                  </div>
+            {/* Card 2: Contracts */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200">
+              <div className="flex flex-col flex-1">
+                <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
+                  <FileSignature className="w-4.5 h-4.5 text-gray-800" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-3">
-                  Contracts & Agreements
+                <h3 className="text-lg font-semibold text-gray-900 tracking-tight mb-2">
+                  Contracts
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Identify key clauses, obligations, deadlines and renewal terms.
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Identify key clauses, obligations and renewal dates.
                 </p>
+                <div className="flex-1 min-h-[16px]" />
               </div>
 
-              <div className="pt-6 mt-6 border-t border-gray-200/70">
-                <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-600">
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Key clauses</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Renewal dates</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Liability limits</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Risk terms</span>
-                </div>
+              <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70">
+                <p className="text-xs text-gray-500 font-medium tracking-tight">
+                  Clauses <span className="text-gray-300 mx-1.5 font-normal">·</span> Dates <span className="text-gray-300 mx-1.5 font-normal">·</span> Terms
+                </p>
               </div>
             </div>
 
             {/* Card 3: Forms & Applications */}
-            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:shadow-duna transition-all duration-200">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs">
-                    <FileCheck className="w-5 h-5" />
-                  </div>
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200">
+              <div className="flex flex-col flex-1">
+                <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
+                  <FileCheck className="w-4.5 h-4.5 text-gray-800" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-3">
-                  Forms & Applications
+                <h3 className="text-lg font-semibold text-gray-900 tracking-tight mb-2">
+                  Forms &amp; Applications
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Turn completed forms and applications into structured digital records.
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Turn forms and applications into structured digital records.
+                </p>
+                <div className="flex-1 min-h-[16px]" />
+              </div>
+
+              <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70">
+                <p className="text-xs text-gray-500 font-medium tracking-tight">
+                  Onboarding <span className="text-gray-300 mx-1.5 font-normal">·</span> Claims <span className="text-gray-300 mx-1.5 font-normal">·</span> KYC
                 </p>
               </div>
-
-              <div className="pt-6 mt-6 border-t border-gray-200/70">
-                <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-600">
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Client onboarding</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Claims</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">KYC check</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Digital records</span>
-                </div>
-              </div>
             </div>
 
-            {/* Card 4: Business & Technical Documents */}
-            <div className="p-7 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/90 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:shadow-duna transition-all duration-200">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs">
-                    <FileSpreadsheet className="w-5 h-5" />
-                  </div>
+            {/* Card 4: Business Documents */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#FBFBF9] border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200">
+              <div className="flex flex-col flex-1">
+                <div className="w-9 h-9 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
+                  <FileSpreadsheet className="w-4.5 h-4.5 text-gray-800" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight mb-3">
-                  Business & Technical Documents
+                <h3 className="text-lg font-semibold text-gray-900 tracking-tight mb-2">
+                  Business Documents
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Process delivery notes, certificates, reports and technical paperwork.
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Process delivery notes, certificates and technical reports.
+                </p>
+                <div className="flex-1 min-h-[16px]" />
+              </div>
+
+              <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70">
+                <p className="text-xs text-gray-500 font-medium tracking-tight">
+                  Delivery <span className="text-gray-300 mx-1.5 font-normal">·</span> Reports <span className="text-gray-300 mx-1.5 font-normal">·</span> Specs
                 </p>
               </div>
-
-              <div className="pt-6 mt-6 border-t border-gray-200/70">
-                <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-600">
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Delivery notes</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Shipping bills</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Certificates</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white border border-gray-200/80">Specifications</span>
-                </div>
-              </div>
             </div>
 
-          </div>
-
-          {/* Understated Callout Below Cards */}
-          <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-[#FBFBF9] border border-gray-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h4 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight mb-1">
-                Have a different document type?
-              </h4>
-              <p className="text-sm text-gray-600">
-                We can build a processing solution specifically for it.
-              </p>
-            </div>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-black shrink-0 transition-colors group"
-            >
-              <span>Discuss your documents</span>
-              <ArrowRight className="w-4 h-4 text-gray-500 group-hover:translate-x-1 transition-transform" />
-            </a>
           </div>
 
         </div>
@@ -1589,7 +1554,7 @@ export default function DocumentIntelligencePage() {
                 <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
                   <Inbox className="w-5 h-5 text-gray-900" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 font-medium mb-1">01</div>
+
                 <h3 className="text-base xl:text-lg font-semibold text-gray-900 tracking-tight mb-2">
                   Receive & classify
                 </h3>
@@ -1608,7 +1573,6 @@ export default function DocumentIntelligencePage() {
                 <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
                   <ScanLine className="w-5 h-5 text-gray-900" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 font-medium mb-1">02</div>
                 <h3 className="text-base xl:text-lg font-semibold text-gray-900 tracking-tight mb-2">
                   Read & extract
                 </h3>
@@ -1627,7 +1591,6 @@ export default function DocumentIntelligencePage() {
                 <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
                   <CheckCircle2 className="w-5 h-5 text-gray-900" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 font-medium mb-1">03</div>
                 <h3 className="text-base xl:text-lg font-semibold text-gray-900 tracking-tight mb-2">
                   Validate
                 </h3>
@@ -1646,7 +1609,6 @@ export default function DocumentIntelligencePage() {
                 <div className="w-10 h-10 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center text-gray-900 shadow-xs mb-4">
                   <AlertCircle className="w-5 h-5 text-gray-900" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 font-medium mb-1">04</div>
                 <h3 className="text-base xl:text-lg font-semibold text-gray-900 tracking-tight mb-2">
                   Review when needed
                 </h3>
@@ -1665,7 +1627,6 @@ export default function DocumentIntelligencePage() {
                 <div className="w-10 h-10 rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center text-white shadow-xs mb-4">
                   <Database className="w-5 h-5 text-white" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 font-medium mb-1">05</div>
                 <h3 className="text-base xl:text-lg font-semibold text-white tracking-tight mb-2">
                   Send to systems
                 </h3>
