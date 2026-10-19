@@ -9,11 +9,9 @@ import {
   FileCheck,
   Layers,
   ShieldCheck,
-  Workflow,
   Cpu,
   Database,
   ScanLine,
-  RefreshCw,
   Code2,
   Copy,
   ExternalLink,
@@ -44,7 +42,8 @@ export default function DocumentIntelligencePage() {
   const [demoViewMode, setDemoViewMode] = useState('fields'); // 'fields' | 'json'
   const [hoveredFieldKey, setHoveredFieldKey] = useState(null);
   const [copiedJson, setCopiedJson] = useState(false);
-  const [syncStatus, setSyncStatus] = useState('idle'); // 'idle' | 'syncing' | 'synced'
+  const docPreviewRef = useRef(null);
+  const [docPreviewHeight, setDocPreviewHeight] = useState(null);
 
   // Parallax refs and states
   const problemSectionRef = useRef(null);
@@ -83,6 +82,32 @@ export default function DocumentIntelligencePage() {
       );
     }
   }, []);
+
+  // Sync right panel's fields height to match the left document preview's exact content height
+  useEffect(() => {
+    const updateHeight = () => {
+      if (docPreviewRef.current) {
+        setDocPreviewHeight(docPreviewRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+
+    let ro;
+    if (typeof ResizeObserver !== 'undefined' && docPreviewRef.current) {
+      ro = new ResizeObserver(() => {
+        updateHeight();
+      });
+      ro.observe(docPreviewRef.current);
+    }
+
+    window.addEventListener('resize', updateHeight);
+
+    return () => {
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', updateHeight);
+    };
+  }, [activeDocType]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -706,14 +731,6 @@ export default function DocumentIntelligencePage() {
     setTimeout(() => setCopiedJson(false), 2000);
   };
 
-  const handleSimulateSync = () => {
-    setSyncStatus('syncing');
-    setTimeout(() => {
-      setSyncStatus('synced');
-      setTimeout(() => setSyncStatus('idle'), 3000);
-    }, 900);
-  };
-
   // Deployment comparison table rows
   const comparisonRows = [
     { label: "Document Ingestion", onprem: "Your internal storage / network", privateCloud: "Dedicated VPC / Encrypted", cloud: "Cloud storage endpoint" },
@@ -809,11 +826,6 @@ export default function DocumentIntelligencePage() {
               <span className="block mt-2 sm:mt-3">We make it ready to use.</span>
             </h1>
 
-            {/* Supporting Text */}
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10 sm:mb-12 font-normal">
-              We build custom AI systems that read, understand, and process invoices, contracts, forms, and other business documents.
-            </p>
-
             {/* Primary CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
               <a
@@ -837,9 +849,6 @@ export default function DocumentIntelligencePage() {
 
           {/* Section Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">
-            <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-2.5 sm:mb-3">
-              DOCUMENT AUTOMATION
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-4">
               Less manual work. More automated workflows.
             </h2>
@@ -988,9 +997,9 @@ export default function DocumentIntelligencePage() {
         style={{ marginTop: '-1px' }}
         className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
       >
-        {/* Parallax Background Layer with zima-zima.png */}
+        {/* Parallax Background Layer with levander-cottage.png */}
         <div
-          className="absolute -inset-y-20 inset-x-0 bg-zima-zima pointer-events-none"
+          className="absolute -inset-y-20 inset-x-0 bg-levander-cottage pointer-events-none"
           style={{
             transform: `translate3d(0, ${demoParallaxY}px, 0)`,
             willChange: 'transform'
@@ -1158,7 +1167,10 @@ export default function DocumentIntelligencePage() {
                   </div>
 
                   {/* Document Container styling mimicking real paper / sheet */}
-                  <div className="p-6 bg-white rounded-2xl border border-gray-200/90 shadow-xs font-sans text-gray-900 transition-all text-xs sm:text-sm">
+                  <div
+                    ref={docPreviewRef}
+                    className="p-6 bg-white rounded-2xl border border-gray-200/90 shadow-xs font-sans text-gray-900 transition-all text-xs sm:text-sm"
+                  >
 
                     {/* RENDER INVOICE PREVIEW */}
                     {activeDocType === 'invoice' && (
@@ -1420,10 +1432,10 @@ export default function DocumentIntelligencePage() {
               {/* RIGHT PANEL: Extracted Structured Information or JSON */}
               <div className="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between bg-white">
 
-                <div className="space-y-4">
+                <div>
 
                   {/* Panel Header */}
-                  <div className="flex items-center justify-between pb-3 border-b border-gray-200/80">
+                  <div className="flex items-center justify-between pb-3 border-b border-gray-200/80 mb-4">
                     <div>
                       <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400">
                         EXTRACTED STRUCTURED DATA
@@ -1456,7 +1468,10 @@ export default function DocumentIntelligencePage() {
 
                   {/* VIEW MODE 1: HUMAN-READABLE EXTRACTED FIELDS */}
                   {demoViewMode === 'fields' && (
-                    <div className="space-y-2.5 max-h-[440px] overflow-y-auto pr-1">
+                    <div
+                      style={docPreviewHeight ? { height: `${docPreviewHeight}px` } : undefined}
+                      className="space-y-2.5 overflow-y-auto pr-1"
+                    >
                       {activeDoc.fields.map((field) => {
                         const isHovered = hoveredFieldKey === field.key;
                         return (
@@ -1508,7 +1523,10 @@ export default function DocumentIntelligencePage() {
 
                   {/* VIEW MODE 2: RAW SYNTAX-HIGHLIGHTED JSON OUTPUT */}
                   {demoViewMode === 'json' && (
-                    <div className="bg-gray-950 text-gray-100 p-4 rounded-2xl font-mono text-xs overflow-x-auto max-h-[440px] leading-relaxed shadow-inner">
+                    <div
+                      style={docPreviewHeight ? { height: `${docPreviewHeight}px` } : undefined}
+                      className="bg-gray-950 text-gray-100 p-4 rounded-2xl font-mono text-xs overflow-x-auto leading-relaxed shadow-inner"
+                    >
                       <pre>
                         <code>{JSON.stringify(activeDoc.json, null, 2)}</code>
                       </pre>
@@ -1517,54 +1535,10 @@ export default function DocumentIntelligencePage() {
 
                 </div>
 
-                {/* Bottom Actions: Simulate ERP Sync */}
-                <div className="pt-4 mt-4 border-t border-gray-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <div className="text-xs text-gray-500 font-mono">
-                    Transformation: <span className="text-gray-900 font-medium">Unstructured Document → Verified Data Model</span>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handleSimulateSync}
-                    disabled={syncStatus === 'syncing'}
-                    className={`w-full sm:w-auto px-5 py-2.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${syncStatus === 'synced'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-gray-900 hover:bg-black text-white shadow-xs'
-                      }`}
-                  >
-                    {syncStatus === 'syncing' ? (
-                      <>
-                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                        <span>Pushing to {activeDoc.systemTarget}...</span>
-                      </>
-                    ) : syncStatus === 'synced' ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Synced to ERP · HTTP 200 OK</span>
-                      </>
-                    ) : (
-                      <>
-                        <Workflow className="w-3.5 h-3.5" />
-                        <span>Simulate ERP Dispatch</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
               </div>
 
             </div>
 
-          </div>
-
-          {/* Demonstration Takeaway Footer */}
-          <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <p className="text-base font-semibold text-gray-900 tracking-tight shrink-0">
-              Document → AI Extraction → Validation → Structured Data → Business System
-            </p>
-            <p className="text-sm text-gray-600 leading-relaxed max-w-xl">
-              No manual copy-pasting, zero typing mistakes, and automatic exception routing for business-critical entries.
-            </p>
           </div>
 
         </div>
@@ -1578,9 +1552,6 @@ export default function DocumentIntelligencePage() {
 
           {/* Section Header */}
           <div className="max-w-3xl mb-10 sm:mb-14">
-            <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-2">
-              Architecture & Lifecycle
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4">
               From document to workflow.
             </h2>
@@ -1870,9 +1841,9 @@ export default function DocumentIntelligencePage() {
         style={{ marginTop: '-1px' }}
         className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
       >
-        {/* Parallax Background Layer with cottage-winter.png */}
+        {/* Parallax Background Layer with levander-flat.png */}
         <div
-          className="absolute -inset-y-20 inset-x-0 bg-cottage-winter pointer-events-none"
+          className="absolute -inset-y-20 inset-x-0 bg-levander-flat pointer-events-none"
           style={{
             transform: `translate3d(0, ${workflowParallaxY}px, 0)`,
             willChange: 'transform'
@@ -1895,9 +1866,6 @@ export default function DocumentIntelligencePage() {
 
           {/* Header */}
           <div className="max-w-3xl mb-16 sm:mb-20">
-            <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-medium mb-2">
-              Methodology
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-duna-dark leading-tight">
               How the project works
             </h2>
