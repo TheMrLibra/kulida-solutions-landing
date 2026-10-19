@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import RagSystemsPage from './RagSystemsPage';
 import DocumentIntelligencePage from './DocumentIntelligencePage';
+import FieldServiceAiPage from './FieldServiceAiPage';
 
 export default function ServicePage() {
   const { slug } = useParams();
@@ -15,6 +16,10 @@ export default function ServicePage() {
 
   if (slug === 'document-intelligence') {
     return <DocumentIntelligencePage />;
+  }
+
+  if (slug === 'field-service-ai') {
+    return <FieldServiceAiPage />;
   }
 
   const service = servicesData.find((s) => s.slug === slug);

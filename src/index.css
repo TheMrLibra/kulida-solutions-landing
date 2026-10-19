@@ -83,6 +83,9 @@ button,
   /* Document Intelligence Hero Background */
   --doc-hero-url: url('/images/levandule.png');
 
+  /* Field Service AI Hero Background */
+  --field-service-hero-url: url('/images/louky-s-morem.png');
+
   /* CTA Cloud Parallax Background (Place file at public/images/cta-clouds.jpg) */
   --cta-clouds-bg-url: url('/images/cta-clouds.jpg'), url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1920&q=80');
 }
@@ -105,6 +108,41 @@ button,
   background-image: var(--doc-hero-url);
   background-size: cover;
   background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.bg-field-hero {
+  background-image: var(--field-service-hero-url);
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.bg-louky-s-morem {
+  background-image: url('/images/louky-s-morem.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-les-reka {
+  background-image: url('/images/les-reka.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-coast {
+  background-image: url('/images/coast.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-mlha {
+  background-image: url('/images/mlha.png');
+  background-size: cover;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 

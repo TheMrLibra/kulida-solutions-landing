@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ServicePage from './pages/ServicePage';
 import RagSystemsPage from './pages/RagSystemsPage';
 import DocumentIntelligencePage from './pages/DocumentIntelligencePage';
+import FieldServiceAiPage from './pages/FieldServiceAiPage';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services/rag-systems" element={<RagSystemsPage />} />
             <Route path="/services/document-intelligence" element={<DocumentIntelligencePage />} />
+            <Route path="/services/field-service-ai" element={<FieldServiceAiPage />} />
             <Route path="/services/:slug" element={<ServicePage />} />
           </Routes>
         </main>
