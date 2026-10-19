@@ -384,7 +384,7 @@ export default function FieldServiceAiPage() {
       {/* SECTION 1 — HERO                                                  */}
       {/* ================================================================= */}
       <section className="relative pt-36 pb-24 md:pt-40 md:pb-28 lg:pt-44 lg:pb-36 overflow-hidden z-10 border-duna-border">
-        {/* Parallax Background Layer with open landscape & sky */}
+        {/* Parallax Background Layer with les-reka.png */}
         <div
           className="absolute inset-0 bg-field-hero pointer-events-none"
           style={{
@@ -419,7 +419,7 @@ export default function FieldServiceAiPage() {
                 href="#contact"
                 className="bg-duna-dark hover:bg-black text-white text-sm font-medium px-8 py-3.5 rounded-[10rem] shadow-duna hover:shadow-duna-hover transition-all duration-200 text-center flex items-center justify-center gap-2 group w-full sm:w-auto"
               >
-                <span>Book a free 30-minute call</span>
+                <span>Book a consultation</span>
                 <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -457,9 +457,9 @@ export default function FieldServiceAiPage() {
         style={{ marginTop: '-1px' }}
         className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
       >
-        {/* Parallax Background Layer with warm-plains.png */}
+        {/* Parallax Background Layer with forrest-lake-2.png */}
         <div
-          className="absolute -inset-y-20 inset-x-0 bg-warm-plains pointer-events-none"
+          className="absolute -inset-y-20 inset-x-0 bg-forrest-lake-2 pointer-events-none"
           style={{
             transform: `translate3d(0, ${problemParallaxY}px, 0)`,
             willChange: 'transform'
@@ -591,9 +591,9 @@ export default function FieldServiceAiPage() {
         style={{ marginTop: '-1px' }}
         className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
       >
-        {/* Parallax Background Layer with cold-plains.png */}
+        {/* Parallax Background Layer with forrest-lake.png */}
         <div
-          className="absolute -inset-y-20 inset-x-0 bg-cold-plains pointer-events-none"
+          className="absolute -inset-y-20 inset-x-0 bg-forrest-lake pointer-events-none"
           style={{
             transform: `translate3d(0, ${demoParallaxY}px, 0)`,
             willChange: 'transform'
@@ -1313,31 +1313,9 @@ export default function FieldServiceAiPage() {
       <section
         ref={workflowRef}
         id="workflow"
-        style={{ marginTop: '-1px' }}
-        className="relative z-10 overflow-hidden py-20 sm:py-28 bg-white"
+        className="relative z-10 py-20 sm:py-28 bg-white"
       >
-        {/* Parallax Background Layer with cottage-winter.png */}
-        <div
-          className="absolute -inset-y-20 inset-x-0 bg-cottage-winter pointer-events-none"
-          style={{
-            transform: `translate3d(0, ${workflowParallaxY}px, 0)`,
-            willChange: 'transform'
-          }}
-        />
-
-        {/* Semi-transparent white overlay */}
-        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
-
-        {/* Dispersion gradient */}
-        <div className="absolute inset-0 value-mist-gradient pointer-events-none" />
-
-        {/* Scroll-driven mist */}
-        <div
-          className="absolute inset-0 value-mist-gradient pointer-events-none"
-          style={{ opacity: workflowMistOpacity }}
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
           <div className="max-w-3xl mb-16 sm:mb-20">
@@ -1375,11 +1353,6 @@ export default function FieldServiceAiPage() {
                     style={{ transitionDelay: `${delay}ms` }}
                   />
 
-                  {/* Step Number */}
-                  <div className="font-mono text-xs text-gray-400 font-medium mb-3">
-                    {step.number}
-                  </div>
-
                   {/* Step Title */}
                   <h3 className="text-xl sm:text-2xl font-medium tracking-tight text-gray-900 mb-3">
                     {step.title}
@@ -1393,48 +1366,6 @@ export default function FieldServiceAiPage() {
               );
             })}
 
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* SECTION 9 — FREQUENTLY ASKED QUESTIONS                            */}
-      {/* ================================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-10">
-            Frequently asked questions
-          </h2>
-
-          <div className="divide-y divide-gray-200">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div key={idx} className="py-5">
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
-                  >
-                    <span className="text-base sm:text-lg font-semibold text-gray-900">
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
-                        }`}
-                    />
-                  </button>
-
-                  {isOpen && (
-                    <div className="pt-3 text-sm sm:text-base text-gray-600 leading-relaxed pr-6 animate-in fade-in duration-150">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
           </div>
 
         </div>
@@ -1545,27 +1476,6 @@ export default function FieldServiceAiPage() {
                   />
                 </div>
 
-                {/* Type of service work */}
-                <div>
-                  <label htmlFor="contact-service-type" className="block text-xs text-gray-600 font-medium mb-1 pl-1">
-                    Type of service work *
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="contact-service-type"
-                      defaultValue="Heat pumps, HVAC, and boilers"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 text-sm appearance-none cursor-pointer focus:outline-none focus:border-black pr-10"
-                    >
-                      <option value="Heat pumps, HVAC, and boilers">Heat pumps, HVAC, and boilers</option>
-                      <option value="Plumbing and electrical contracting">Plumbing and electrical contracting</option>
-                      <option value="Equipment and machinery maintenance">Equipment and machinery maintenance</option>
-                      <option value="Inspection and compliance services">Inspection and compliance services</option>
-                      <option value="Solar installation and maintenance">Solar installation and maintenance</option>
-                      <option value="Other field service operations">Other field service operations</option>
-                    </select>
-                    <ChevronDown className="w-4 h-4 text-gray-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  </div>
-                </div>
 
                 {/* Number of technicians (optional) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

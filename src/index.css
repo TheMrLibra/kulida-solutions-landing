@@ -84,7 +84,7 @@ button,
   --doc-hero-url: url('/images/levandule.png');
 
   /* Field Service AI Hero Background */
-  --field-service-hero-url: url('/images/louky-s-morem.png');
+  --field-service-hero-url: url('/images/les-reka.png');
 
   /* CTA Cloud Parallax Background (Place file at public/images/cta-clouds.jpg) */
   --cta-clouds-bg-url: url('/images/cta-clouds.jpg'), url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1920&q=80');
@@ -114,7 +114,7 @@ button,
 .bg-field-hero {
   background-image: var(--field-service-hero-url);
   background-size: cover;
-  background-position: center 25%;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
@@ -202,6 +202,27 @@ button,
   background-image: url('/images/levander-flat.png');
   background-size: cover;
   background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.bg-forrest-lake {
+  background-image: url('/images/forrest-lake.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-forrest-lake-2 {
+  background-image: url('/images/forrest-lake-2.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bg-forrest-river {
+  background-image: url('/images/forrest-river.png');
+  background-size: cover;
+  background-position: center bottom;
   background-repeat: no-repeat;
 }
 
